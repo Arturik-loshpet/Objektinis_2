@@ -7,12 +7,31 @@
 template <typename GradeContainer>
 class Studentas {
 public:
-    std::string vardas;
-    std::string pavarde;
-    GradeContainer paz;
-    int egz = 0;
-    double vid = 0.0;
-    double med = 0.0;
+    const std::string& vardas() const { return vardas_; }
+    void setVardas(const std::string& vardas) { vardas_ = vardas; }
+
+    const std::string& pavarde() const { return pavarde_; }
+    void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
+
+    GradeContainer& pazymiai() { return pazymiai_; }
+    const GradeContainer& pazymiai() const { return pazymiai_; }
+
+    int egzaminas() const { return egzaminas_; }
+    void setEgzaminas(int egzaminas) { egzaminas_ = egzaminas; }
+
+    double vidurkis() const { return vidurkis_; }
+    void setVidurkis(double vidurkis) { vidurkis_ = vidurkis; }
+
+    double mediana() const { return mediana_; }
+    void setMediana(double mediana) { mediana_ = mediana; }
+
+private:
+    std::string vardas_;
+    std::string pavarde_;
+    GradeContainer pazymiai_;
+    int egzaminas_ = 0;
+    double vidurkis_ = 0.0;
+    double mediana_ = 0.0;
 };
 using VectorStudent = Studentas<std::vector<int>>;
 using ListStudent = Studentas<std::list<int>>;
@@ -60,7 +79,7 @@ template <typename Student>
 void paz_sk(Student& temp, int& m) {
     std::string input;
     while (true) {
-        std::cout << "Kiek pazymiu turi " << temp.vardas << " " << temp.pavarde << "? ";
+        std::cout << "Kiek pazymiu turi " << temp.vardas() << " " << temp.pavarde() << "? ";
         if (!read_input(input)) {
             return;
         }
@@ -89,7 +108,7 @@ void paz_ivestis_ranka(Student& temp, int m) {
             --j;
             continue;
         }
-        temp.paz.push_back(pazymis);
+        temp.pazymiai().push_back(pazymis);
     }
 }
 
@@ -97,7 +116,7 @@ template <typename Student>
 void egz_ivestis_ranka(Student& temp) {
     std::string input;
     while (true) {
-        std::cout << "Koks yra " << temp.vardas << " " << temp.pavarde << " egzamino rezultatas? ";
+        std::cout << "Koks yra " << temp.vardas() << " " << temp.pavarde() << " egzamino rezultatas? ";
         if (!read_input(input)) {
             return;
         }
@@ -106,7 +125,7 @@ void egz_ivestis_ranka(Student& temp) {
             std::cout << "Netinkamas sk. Bandykite dar karta" << std::endl;
             continue;
         }
-        temp.egz = egz;
+        temp.setEgzaminas(egz);
         break;
     }
 }
@@ -128,8 +147,8 @@ void vardu_ivedimas_ranka(Student& temp, std::size_t current_count) {
             continue;
         }
         if (valid_name(vardas) && valid_name(pavarde)) {
-            temp.vardas = vardas;
-            temp.pavarde = pavarde;
+            temp.setVardas(vardas);
+            temp.setPavarde(pavarde);
             break;
         }
         std::cout << "Iveskite tinkama varda ir pavarde" << std::endl;
@@ -142,7 +161,7 @@ void paz_ivestis_random(Student& temp, int m) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(1, 10);
     for (int i = 0; i < m; ++i) {
-        temp.paz.push_back(dist(gen));
+        temp.pazymiai().push_back(dist(gen));
     }
 }
 
@@ -151,7 +170,7 @@ void egz_ivestis_random(Student& temp) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(1, 10);
-    temp.egz = dist(gen);
+    temp.setEgzaminas(dist(gen));
 }
 
 template <typename Student>
@@ -169,25 +188,26 @@ void vardu_ivedimas_random(Student& temp) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 9);
     const int r = dist(gen);
-    temp.vardas = vard[r];
-    temp.pavarde = pav[r];
+    temp.setVardas(vard[r]);
+    temp.setPavarde(pav[r]);
 }
 
 template <typename StudentContainer>
 void vidurkis(StudentContainer& stud) {
     for (auto& studentas : stud) {
         double sum = 0.0;
-        for (int pazymis : studentas.paz) {
+        for (int pazymis : studentas.pazymiai()) {
             sum += pazymis;
         }
-        studentas.vid = (sum / static_cast<double>(studentas.paz.size())) * 0.4 + studentas.egz * 0.6;
+        studentas.setVidurkis((sum / static_cast<double>(studentas.pazymiai().size())) * 0.4
+                              + studentas.egzaminas() * 0.6);
     }
 }
 
 template <typename StudentContainer>
 void mediana(StudentContainer& stud) {
     for (auto& studentas : stud) {
-        studentas.med = skaiciuoti_mediana(studentas.paz);
+        studentas.setMediana(skaiciuoti_mediana(studentas.pazymiai()));
     }
 }
 
@@ -215,9 +235,9 @@ void isvestis(StudentContainer& stud) {
         }
         std::cout << "-----------------------------------------------------------------------------------" << std::endl;
         for (const auto& studentas : stud) {
-            std::cout << std::fixed << std::left << std::setw(15) << studentas.vardas
-                      << std::setw(15) << studentas.pavarde << std::setw(9) << std::setprecision(2)
-                      << (choice == 1 ? studentas.med : studentas.vid) << std::endl;
+            std::cout << std::fixed << std::left << std::setw(15) << studentas.vardas()
+                      << std::setw(15) << studentas.pavarde() << std::setw(9) << std::setprecision(2)
+                      << (choice == 1 ? studentas.mediana() : studentas.vidurkis()) << std::endl;
         }
         return;
     }
@@ -235,13 +255,13 @@ void rusiavimas(StudentContainer& stud, double& laikas) {
         const auto pradzia = std::chrono::high_resolution_clock::now();
         const int choice = validation(input);
         if (choice == 1) {
-            sort_container(stud, [](const auto& a, const auto& b) { return a.vardas < b.vardas; });
+            sort_container(stud, [](const auto& a, const auto& b) { return a.vardas() < b.vardas(); });
         } else if (choice == 2) {
-            sort_container(stud, [](const auto& a, const auto& b) { return a.pavarde < b.pavarde; });
+            sort_container(stud, [](const auto& a, const auto& b) { return a.pavarde() < b.pavarde(); });
         } else if (choice == 3) {
-            sort_container(stud, [](const auto& a, const auto& b) { return a.vid < b.vid; });
+            sort_container(stud, [](const auto& a, const auto& b) { return a.vidurkis() < b.vidurkis(); });
         } else if (choice == 4) {
-            sort_container(stud, [](const auto& a, const auto& b) { return a.med < b.med; });
+            sort_container(stud, [](const auto& a, const auto& b) { return a.mediana() < b.mediana(); });
         } else {
             std::cout << "Iveskite tinkama sk!" << std::endl;
             continue;
@@ -307,9 +327,9 @@ void isvestis_failas(StudentContainer& stud) {
              << std::setw(20) << "Galutinis (Vid.)" << std::setw(10) << "Galutinis (Med.)" << std::endl;
         *out << "-----------------------------------------------------------------------------------" << std::endl;
         for (const auto& studentas : stud) {
-            *out << std::fixed << std::left << std::setw(15) << studentas.vardas
-                 << std::setw(15) << studentas.pavarde << std::setw(9) << std::setprecision(2)
-                 << studentas.vid << std::setw(9) << studentas.med << std::endl;
+            *out << std::fixed << std::left << std::setw(15) << studentas.vardas()
+                 << std::setw(15) << studentas.pavarde() << std::setw(9) << std::setprecision(2)
+                 << studentas.vidurkis() << std::setw(9) << studentas.mediana() << std::endl;
         }
         return;
     }
@@ -351,27 +371,31 @@ void skaitymas(StudentContainer& stud, const std::string& input, double& laikas)
 
             Student temp;
             std::istringstream laik(line);
-            if (!(laik >> temp.vardas >> temp.pavarde)) {
+            std::string vardas;
+            std::string pavarde;
+            if (!(laik >> vardas >> pavarde)) {
                 throw std::runtime_error("Netinkamas failo formatas.");
             }
+            temp.setVardas(vardas);
+            temp.setPavarde(pavarde);
 
             while (laik >> pazymis) {
                 if (pazymis < 1 || pazymis > 10) {
                     throw std::runtime_error("Pazymiai faile turi buti nuo 1 iki 10.");
                 }
-                temp.paz.push_back(pazymis);
+                temp.pazymiai().push_back(pazymis);
             }
 
             if (laik.fail() && !laik.eof()) {
                 throw std::runtime_error("Netinkamas pazymio formatas faile.");
             }
-            if (temp.paz.empty()) {
+            if (temp.pazymiai().empty()) {
                 throw std::runtime_error("Studentas neturi nei vieno pazymio.");
             }
 
-            temp.egz = temp.paz.back();
-            temp.paz.pop_back();
-            if (temp.paz.empty()) {
+            temp.setEgzaminas(temp.pazymiai().back());
+            temp.pazymiai().pop_back();
+            if (temp.pazymiai().empty()) {
                 throw std::runtime_error("Truksta namu darbu pazymiu.");
             }
 
@@ -395,7 +419,7 @@ void skirstymas(StudentContainer& stud, StudentContainer& maladiec, StudentConta
     (void)stud;
 
     auto border = std::partition(maladiec.begin(), maladiec.end(), [](const auto& studentas) {
-        return studentas.vid >= 5;
+        return studentas.vidurkis() >= 5;
     });
 
     for (auto it = border; it != maladiec.end(); ++it) {
@@ -418,9 +442,9 @@ void rasymas(const StudentContainer& a, const std::string& name, double& laikas)
               << std::setw(20) << "Galutinis (Vid.)" << std::setw(10) << "Galutinis (Med.)" << std::endl;
     rezfailas << "-----------------------------------------------------------------------------------" << std::endl;
     for (const auto& studentas : a) {
-        rezfailas << std::fixed << std::left << std::setw(15) << studentas.vardas
-                  << std::setw(15) << studentas.pavarde << std::setw(9) << std::setprecision(2)
-                  << studentas.vid << std::setw(9) << studentas.med << std::endl;
+        rezfailas << std::fixed << std::left << std::setw(15) << studentas.vardas()
+                  << std::setw(15) << studentas.pavarde() << std::setw(9) << std::setprecision(2)
+                  << studentas.vidurkis() << std::setw(9) << studentas.mediana() << std::endl;
     }
 
     const auto pabaiga = std::chrono::high_resolution_clock::now();
@@ -506,7 +530,7 @@ int run_program(const std::string& konteinerio_pavadinimas) {
             const int choice = validation(input);
             if (choice == 1) {
                 vardu_ivedimas_ranka(temp, stud.size());
-                if (temp.vardas.empty() || temp.pavarde.empty()) {
+                if (temp.vardas().empty() || temp.pavarde().empty()) {
                     break;
                 }
                 paz_sk(temp, m);
@@ -514,17 +538,17 @@ int run_program(const std::string& konteinerio_pavadinimas) {
                     break;
                 }
                 paz_ivestis_ranka(temp, m);
-                if (temp.paz.size() != static_cast<std::size_t>(m)) {
+                if (temp.pazymiai().size() != static_cast<std::size_t>(m)) {
                     break;
                 }
                 egz_ivestis_ranka(temp);
-                if (temp.egz == 0) {
+                if (temp.egzaminas() == 0) {
                     break;
                 }
                 stud.push_back(temp);
             } else if (choice == 2) {
                 vardu_ivedimas_ranka(temp, stud.size());
-                if (temp.vardas.empty() || temp.pavarde.empty()) {
+                if (temp.vardas().empty() || temp.pavarde().empty()) {
                     break;
                 }
                 paz_sk(temp, m);
@@ -583,11 +607,11 @@ void sort_ascending(Container& c, double& laikas) {
     const auto pradzia = std::chrono::high_resolution_clock::now();
     if constexpr (std::is_same_v<Container, std::list<typename Container::value_type>>) {
         c.sort([](const auto& a, const auto& b) {
-        return a.vid < b.vid;
+        return a.vidurkis() < b.vidurkis();
     });
     } else {
         std::sort(c.begin(), c.end(), [](const auto& a, const auto& b) {
-        return a.vid < b.vid;
+        return a.vidurkis() < b.vidurkis();
     });
     }
     const auto pabaiga = std::chrono::high_resolution_clock::now();
