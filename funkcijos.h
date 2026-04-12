@@ -5,7 +5,8 @@
 #include "patikrinimai.h"
 
 template <typename GradeContainer>
-struct Studentas {
+class Studentas {
+public:
     std::string vardas;
     std::string pavarde;
     GradeContainer paz;
