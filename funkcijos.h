@@ -4,10 +4,6 @@
 #include "library.h"
 #include "patikrinimai.h"
 
-
-
-
-
 template <typename GradeContainer>
 class Studentas {
 public:
