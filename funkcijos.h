@@ -3,7 +3,7 @@
 
 #include "library.h"
 #include "patikrinimai.h"
-//d
+
 
 template <typename GradeContainer>
 class Studentas {
