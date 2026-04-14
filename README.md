@@ -50,8 +50,32 @@ SSD - 256gb
 <img width="263" height="115" alt="image" src="https://github.com/user-attachments/assets/b9e15a0c-a37b-4755-8acc-61c29c43b773" />
 
 ---------------------------------------------------------------------------------------------------------------------------
+V1.1 TESTAVIMAI
+Padaryti pokyčiai - Struct pakeistas į Class.
+---------------------------------------------------------------------------------------------------------------------------
+Greičio patikrinimas po pokyčių:
+<img width="659" height="117" alt="image" src="https://github.com/user-attachments/assets/2efeb265-9c7d-48be-8885-022c09e00e36" />
+Aiškių skirtumų tarp atlikimo laiko nėra.
 
+---------------------------------------------------------------------------------------------------------------------------
+Optimizacijos Flagai.
+Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo atlikti su tais pačiais failais.
 
+-O1:
+<img width="484" height="118" alt="image" src="https://github.com/user-attachments/assets/97e61b6a-8b9e-47d1-ba1f-4d350db4675f" />
+
+---------------------------------------------------------------------------------------------------------------------------
+-O2:
+<img width="481" height="117" alt="image" src="https://github.com/user-attachments/assets/7659222b-348c-45c8-928e-2bce69b53362" />
+
+---------------------------------------------------------------------------------------------------------------------------
+
+-O3:
+<img width="482" height="117" alt="image" src="https://github.com/user-attachments/assets/fb510307-4192-462a-a70b-5856c783f1c8" />
+
+---------------------------------------------------------------------------------------------------------------------------
+Išvados:
+Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
 
 
 
