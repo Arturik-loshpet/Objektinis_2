@@ -89,6 +89,18 @@ Apie išvesties ir išvesties metodus:
 2. operator<< išveda studento duomenis tuo pačiu formatu į failą arba į konsolę pagal vartotojo pasirinkimą.
 3. šie operatoriai buvo testuojami rule_of_five_test.cpp
 
+|Funkcija	        |Aprašymas                                |
+---------------------------------------------------------------
+|Rankinė įvestis	    |Vartotojas pats suveda duomenis      |
+---------------------------------------------------------------
+|Automatinė įvestis	|Sugeneruojami pažymiai arba visi duomenys|
+---------------------------------------------------------------
+|Skaitymas iš failo	|Studentai nuskaitomi iš .txt failo       |
+---------------------------------------------------------------
+|Išvestis į ekraną	|Rezultatai rodomi konsolėje              |
+---------------------------------------------------------------
+|Išvestis į failą	|Rezultatai įrašomi į failą               |
+---------------------------------------------------------------
 
 
 
