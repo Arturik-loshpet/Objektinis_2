@@ -27,11 +27,9 @@ public:
 
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
-    void setVardas(std::string&& vardas) { vardas_ = std::move(vardas); }
 
     const std::string& pavarde() const { return pavarde_; }
     void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
-    void setPavarde(std::string&& pavarde) { pavarde_ = std::move(pavarde); }
 
     GradeContainer& pazymiai() { return pazymiai_; }
     const GradeContainer& pazymiai() const { return pazymiai_; }
@@ -44,6 +42,7 @@ public:
 
     double mediana() const { return mediana_; }
     void setMediana(double mediana) { mediana_ = mediana; }
+
 
 private:
     std::string vardas_;
