@@ -14,17 +14,13 @@ public:
     Studentas(const Studentas& other) = default;
 
     // Move constructor.
-    Studentas(Studentas&& other) noexcept(
-        std::is_nothrow_move_constructible_v<std::string> &&
-        std::is_nothrow_move_constructible_v<GradeContainer>) = default;
+    Studentas(Studentas&& other) = default;
 
     // Copy assignment operator.
     Studentas& operator=(const Studentas& other) = default;
 
     // Move assignment operator.
-    Studentas& operator=(Studentas&& other) noexcept(
-        std::is_nothrow_move_assignable_v<std::string> &&
-        std::is_nothrow_move_assignable_v<GradeContainer>) = default;
+    Studentas& operator=(Studentas&& other) = default;
 
     // Destructor.
     ~Studentas() = default;
@@ -64,6 +60,47 @@ using DequeStudent = Studentas<std::deque<int>>;
 using VectorContainer = std::vector<VectorStudent>;
 using ListContainer = std::list<ListStudent>;
 using DequeContainer = std::deque<DequeStudent>;
+
+template <typename GradeContainer>
+std::ostream& operator<<(std::ostream& out, const Studentas<GradeContainer>& studentas) {
+    out << studentas.vardas() << " "
+        << studentas.pavarde() << " "
+        << studentas.egzaminas() << " "
+        << studentas.pazymiai().size();
+
+    for (int pazymis : studentas.pazymiai()) {
+        out << " " << pazymis;
+    }
+
+    return out;
+}
+
+template <typename GradeContainer>
+std::istream& operator>>(std::istream& in, Studentas<GradeContainer>& studentas) {
+    std::string vardas;
+    std::string pavarde;
+    int egzaminas = 0;
+    int pazymiu_kiekis = 0;
+
+    if (!(in >> vardas >> pavarde >> egzaminas >> pazymiu_kiekis)) {
+        return in;
+    }
+
+    studentas.setVardas(vardas);
+    studentas.setPavarde(pavarde);
+    studentas.setEgzaminas(egzaminas);
+    studentas.pazymiai().clear();
+
+    for (int i = 0; i < pazymiu_kiekis; ++i) {
+        int pazymis = 0;
+        if (!(in >> pazymis)) {
+            return in;
+        }
+        studentas.pazymiai().push_back(pazymis);
+    }
+
+    return in;
+}
 
 
 template <typename T, typename Allocator, typename Compare>
