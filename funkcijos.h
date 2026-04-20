@@ -7,11 +7,35 @@
 template <typename GradeContainer>
 class Studentas {
 public:
+    // Default constructor.
+    Studentas() = default;
+
+    // Copy constructor.
+    Studentas(const Studentas& other) = default;
+
+    // Move constructor.
+    Studentas(Studentas&& other) noexcept(
+        std::is_nothrow_move_constructible_v<std::string> &&
+        std::is_nothrow_move_constructible_v<GradeContainer>) = default;
+
+    // Copy assignment operator.
+    Studentas& operator=(const Studentas& other) = default;
+
+    // Move assignment operator.
+    Studentas& operator=(Studentas&& other) noexcept(
+        std::is_nothrow_move_assignable_v<std::string> &&
+        std::is_nothrow_move_assignable_v<GradeContainer>) = default;
+
+    // Destructor.
+    ~Studentas() = default;
+
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
+    void setVardas(std::string&& vardas) { vardas_ = std::move(vardas); }
 
     const std::string& pavarde() const { return pavarde_; }
     void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
+    void setPavarde(std::string&& pavarde) { pavarde_ = std::move(pavarde); }
 
     GradeContainer& pazymiai() { return pazymiai_; }
     const GradeContainer& pazymiai() const { return pazymiai_; }
