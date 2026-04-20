@@ -1,8 +1,10 @@
 Kaip naudotis programa:
 
-1. make - komanda sukuria failą "programa" pagal makefile.
-2. ./programa - komanda paleidžia pačią programą.
-3. make clean - išvalyti kompiliacijos failus.
+1. make clean - išvalyti kompiliacijos failus.
+2. make - komanda sukuria failą "programa" pagal makefile.
+3. ./programa - komanda paleidžia pačią programą.
+
+Papildoma: Norint atlikti programos testavimą konsolėje reikia įrašyti komandą - make test.
 
 
 
@@ -77,6 +79,15 @@ Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo 
 ---------------------------------------------------------------------------------------------------------------------------
 Išvados:
 Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
+
+---------------------------------------------------------------------------------------------------------------------------
+V1.2 TESTAVIMAI
+Padaryti pokyčiai - įgyvendinta "Rule of five" ir įvesties/išvesties operatoriai. Taip pat pridėtas testavimo metodas, kuris patikrina, kad visi metodai veikia.
+
+Apie išvesties ir išvesties metodus:
+1. perator>> nuskaito vardą, pavardę, egzamino pažymį, pažymių kiekį ir pačius pažymius
+2. operator<< išveda studento duomenis tuo pačiu formatu į failą arba į konsolę pagal vartotojo pasirinkimą.
+3. šie operatoriai buvo testuojami rule_of_five_test.cpp
 
 
 
