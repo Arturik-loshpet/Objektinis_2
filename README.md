@@ -43,7 +43,7 @@ SSD - 256gb
 <img width="293" height="129" alt="image" src="https://github.com/user-attachments/assets/ac03cc82-2d30-4901-b502-d864aea7ea9a" />
 
 ---------------------------------------------------------------------------------------------------------------------------
-3 strategija - Padaryta pagal 2 strategija, tik vietoj erase yra naudojamas prtition algoritmas. Rezultatai:
+3 strategija - Padaryta pagal 2 strategija, tik vietoj erase yra naudojamas partition algoritmas. Rezultatai:
 
 <img width="258" height="115" alt="image" src="https://github.com/user-attachments/assets/fe110d55-aecd-4e4b-8f18-6f813f41548b" />
 <img width="261" height="112" alt="image" src="https://github.com/user-attachments/assets/2559908b-b7ea-4c22-9320-030cf8aed6b0" />
@@ -51,7 +51,32 @@ SSD - 256gb
 
 ---------------------------------------------------------------------------------------------------------------------------
 
+V1.1 TESTAVIMAI
+Padaryti pokyčiai - Struct pakeistas į Class.
+---------------------------------------------------------------------------------------------------------------------------
+Greičio patikrinimas po pokyčių:
+<img width="659" height="117" alt="image" src="https://github.com/user-attachments/assets/2efeb265-9c7d-48be-8885-022c09e00e36" />
+Aiškių skirtumų tarp atlikimo laiko nėra.
 
+---------------------------------------------------------------------------------------------------------------------------
+Optimizacijos Flagai.
+Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo atlikti su tais pačiais failais.
+
+-O1:
+<img width="484" height="118" alt="image" src="https://github.com/user-attachments/assets/97e61b6a-8b9e-47d1-ba1f-4d350db4675f" />
+
+---------------------------------------------------------------------------------------------------------------------------
+-O2:
+<img width="481" height="117" alt="image" src="https://github.com/user-attachments/assets/7659222b-348c-45c8-928e-2bce69b53362" />
+
+---------------------------------------------------------------------------------------------------------------------------
+
+-O3:
+<img width="482" height="117" alt="image" src="https://github.com/user-attachments/assets/fb510307-4192-462a-a70b-5856c783f1c8" />
+
+---------------------------------------------------------------------------------------------------------------------------
+Išvados:
+Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
 
 
 
