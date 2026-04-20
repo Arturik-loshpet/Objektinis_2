@@ -92,6 +92,10 @@ Apie išvesties ir išvesties metodus:
 Kaip veikia testavimas:
 Testavimo kodas yra paleidžiamas konsolėje įvedus ./rule_of_five_test. Jis naudojamas visų naujų metodų patikrai. Kodui praėjus testavimą į konsole yra išvedama eilutė "Visi rule of five ir operatoriu testai praejo.", jeigu programa yra terminuojama, reiškias program nepraėjo testavimų.
 
+Programoje įgyvendintos funkcijos:
+<img width="471" height="126" alt="image" src="https://github.com/user-attachments/assets/8622578b-2fa2-498e-a147-0b35ad5ba203" />
+
+
 
 
 
