@@ -4,8 +4,30 @@
 #include "library.h"
 #include "patikrinimai.h"
 
+class Zmogus {
+public:
+    Zmogus() = default;
+    Zmogus(const Zmogus& other) = default;
+    Zmogus(Zmogus&& other) = default;
+    Zmogus& operator=(const Zmogus& other) = default;
+    Zmogus& operator=(Zmogus&& other) = default;
+    virtual ~Zmogus() = default;
+
+    const std::string& vardas() const { return vardas_; }
+    void setVardas(const std::string& vardas) { vardas_ = vardas; }
+
+    const std::string& pavarde() const { return pavarde_; }
+    void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
+
+    virtual std::string tipas() const = 0;
+
+protected:
+    std::string vardas_;
+    std::string pavarde_;
+};
+
 template <typename GradeContainer>
-class Studentas {
+class Studentas : public Zmogus {
 public:
     // Default constructor.
     Studentas() = default;
@@ -25,12 +47,6 @@ public:
     // Destructor.
     ~Studentas() = default;
 
-    const std::string& vardas() const { return vardas_; }
-    void setVardas(const std::string& vardas) { vardas_ = vardas; }
-
-    const std::string& pavarde() const { return pavarde_; }
-    void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
-
     GradeContainer& pazymiai() { return pazymiai_; }
     const GradeContainer& pazymiai() const { return pazymiai_; }
 
@@ -43,10 +59,10 @@ public:
     double mediana() const { return mediana_; }
     void setMediana(double mediana) { mediana_ = mediana; }
 
+    std::string tipas() const override { return "Studentas"; }
+
 
 private:
-    std::string vardas_;
-    std::string pavarde_;
     GradeContainer pazymiai_;
     int egzaminas_ = 0;
     double vidurkis_ = 0.0;
