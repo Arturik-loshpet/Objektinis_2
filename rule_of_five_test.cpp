@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <type_traits>
 #include <sstream>
 
 // Uzpildo studenta pastoviais duomenimis, kad testuose butu lengva lyginti rezultatus.
@@ -29,12 +30,27 @@ void patikrintiStudenta(const VectorStudent& studentas) {
 
 // Tikrina numatyta konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
 void test_default_constructor() {
+    static_assert(std::is_abstract_v<Zmogus>, "Zmogus klase privalo buti abstrakti.");
+
     VectorStudent studentas;
 
     assert(studentas.vardas().empty());
     assert(studentas.pavarde().empty());
     assert(studentas.pazymiai().empty());
     assert(studentas.egzaminas() == 0);
+}
+
+// Tikrina paveldimuma ir tai, kad Studentas veikia per abstrakcios bazes sasaja.
+void test_inheritance_from_zmogus() {
+    VectorStudent studentas;
+    studentas.setVardas("Jonas");
+    studentas.setPavarde("Jonaitis");
+
+    Zmogus& zmogus = studentas;
+
+    assert(zmogus.vardas() == "Jonas");
+    assert(zmogus.pavarde() == "Jonaitis");
+    assert(zmogus.tipas() == "Studentas");
 }
 
 // Tikrina kopijavimo konstruktoriu: ar sukuriama pilna ir nepriklausoma kopija.
@@ -125,6 +141,7 @@ void test_input_operator() {
 
 int main() {
     test_default_constructor();
+    test_inheritance_from_zmogus();
     test_copy_constructor();
     test_move_constructor();
     test_copy_assignment();
