@@ -6,58 +6,6 @@ Kaip naudotis programa:
 
 Papildoma: Norint atlikti programos testavimą konsolėje reikia įrašyti komandą - make test.
 
-## V1.5 aprašymas
-
-`v1.5` versijoje ankstesnė vienintelė `Studentas` klasė buvo pertvarkyta į paveldėjimu pagrįstą hierarchiją:
-
-| Klasė | Paskirtis | Svarbiausios savybės |
-| --- | --- | --- |
-| `Zmogus` | Abstrakti bazinė klasė bendrai žmogaus informacijai | Saugo `vardas`, `pavarde`, turi grynai virtualų metodą `tipas()`, todėl negalima kurti `Zmogus` objektų |
-| `Studentas<GradeContainer>` | Iš `Zmogus` išvestinė klasė | Saugo pažymius, egzamino rezultatą, vidurkį, medianą ir palaiko `rule of five` bei `<<` / `>>` operatorius |
-
-### V1.5 įgyvendinti darbai
-
-| Reikalavimas | Įgyvendinimas |
-| --- | --- |
-| Abstrakti žmogaus klasė | `Zmogus` klasė turi grynai virtualų metodą `tipas()`, todėl yra abstrakti |
-| Draudimas kurti bazės objektus | Teste naudojamas `static_assert(std::is_abstract_v<Zmogus>)`, kuris kompiliacijos metu patvirtina, kad `Zmogus` objektų kurti negalima |
-| Paveldėjimas | `Studentas<GradeContainer> : public Zmogus` |
-| V1.2 logikos išlaikymas | Išsaugota ta pati vieša `Studentas` sąsaja: `setVardas`, `setPavarde`, `pazymiai`, `setEgzaminas`, `setVidurkis`, `setMediana` |
-| Penkių metodų taisyklė | `Studentas` klasėje palikti `default` konstruktoriai, kopijavimo/perkėlimo konstruktoriai, priskyrimo operatoriai ir destruktorius |
-| Testų patikra | `make test` sėkmingai praeina po `v1.5` pakeitimų |
-
-### V1.5 testavimas
-
-`rule_of_five_test.cpp` dabar tikrina ne tik `v1.2` metodus, bet ir naują paveldėjimo struktūrą:
-
-| Testas | Ką tikrina |
-| --- | --- |
-| `test_default_constructor` | Pradinius `Studentas` laukus ir tai, kad `Zmogus` yra abstrakti klasė |
-| `test_inheritance_from_zmogus` | Kad `Studentas` teisingai veikia per `Zmogus&` bazinės klasės sąsają |
-| `test_copy_constructor` | Kopijavimo konstruktorių |
-| `test_move_constructor` | Perkėlimo konstruktorių |
-| `test_copy_assignment` | Kopijavimo priskyrimą |
-| `test_move_assignment` | Perkėlimo priskyrimą |
-| `test_destructor` | Destruktoriaus korektišką veikimą |
-| `test_output_operator` | `operator<<` veikimą |
-| `test_input_operator` | `operator>>` veikimą |
-
-Sėkmingai paleidus testus konsolėje gaunamas rezultatas:
-
-```text
-Visi rule of five ir operatoriu testai praejo.
-```
-
-### V1.5 architektūros iliustracija
-
-| Paveldėjimo schema | Testų būsena |
-| --- | --- |
-| `Zmogus` -> `Studentas<GradeContainer>` | `make test` praeina be klaidų |
-
-Toliau esančios nuotraukos paliekamos kaip ankstesnių versijų našumo ir funkcionalumo iliustracijos, o `v1.5` išlaiko tą pačią `v1.2` veikimo logiką.
-
-
-
 V0.4 testavimai
 ---------------------------------------------------------------------------------------------------------------------------
 4 versijoj duomenų įvedimo sistemoj buvo pridėta nauja failų generavimo funkcija, kuri kuria failus pagal šablonus naudotis 2 versijoj.
