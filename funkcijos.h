@@ -16,7 +16,7 @@ public:
           vidurkis_(vidurkis),
           mediana_(mediana) {}
     
-    ~Studentas(){};
+    ~Studentas(){}
 
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
