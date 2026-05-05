@@ -4,6 +4,10 @@
 #include <iostream>
 #include <sstream>
 
+VectorStudent tusciasStudentas() {
+    return VectorStudent("", "", {}, 0, 0.0, 0.0);
+}
+
 // Uzpildo studenta pastoviais duomenimis, kad testuose butu lengva lyginti rezultatus.
 void uzpildytiStudenta(VectorStudent& studentas) {
     studentas.setVardas("Jonas");
@@ -27,9 +31,9 @@ void patikrintiStudenta(const VectorStudent& studentas) {
     assert(studentas.mediana() == 8.5);
 }
 
-// Tikrina numatyta konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
-void test_default_constructor() {
-    VectorStudent studentas;
+// Tikrina konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
+void test_empty_constructor_values() {
+    VectorStudent studentas = tusciasStudentas();
 
     assert(studentas.vardas().empty());
     assert(studentas.pavarde().empty());
@@ -39,7 +43,7 @@ void test_default_constructor() {
 
 // Tikrina kopijavimo konstruktoriu: ar sukuriama pilna ir nepriklausoma kopija.
 void test_copy_constructor() {
-    VectorStudent pirmas;
+    VectorStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     VectorStudent antras(pirmas);
@@ -54,7 +58,7 @@ void test_copy_constructor() {
 
 // Tikrina perkelimo konstruktoriu: ar duomenys teisingai perkeliami i nauja objekta.
 void test_move_constructor() {
-    VectorStudent pirmas;
+    VectorStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     VectorStudent antras(std::move(pirmas));
@@ -63,8 +67,8 @@ void test_move_constructor() {
 
 // Tikrina kopijavimo priskyrima: ar vienam objektui priskyrus kita, duomenys nukopijuojami teisingai.
 void test_copy_assignment() {
-    VectorStudent pirmas;
-    VectorStudent antras;
+    VectorStudent pirmas = tusciasStudentas();
+    VectorStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = pirmas;
@@ -79,8 +83,8 @@ void test_copy_assignment() {
 
 // Tikrina perkelimo priskyrima: ar duomenys teisingai perkeliami jau egzistuojanciam objektui.
 void test_move_assignment() {
-    VectorStudent pirmas;
-    VectorStudent antras;
+    VectorStudent pirmas = tusciasStudentas();
+    VectorStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = std::move(pirmas);
@@ -90,7 +94,7 @@ void test_move_assignment() {
 // Tikrina destruktoriu: objektas sukuriamas ir sunaikinamas pasibaigus bloko sričiai.
 void test_destructor() {
     {
-        VectorStudent studentas;
+        VectorStudent studentas = tusciasStudentas();
         uzpildytiStudenta(studentas);
         assert(studentas.vardas() == "Jonas");
     }
@@ -98,7 +102,7 @@ void test_destructor() {
 
 // Tikrina isvesties operatoriu << : ar studento duomenys isvedami laukiamu formatu.
 void test_output_operator() {
-    VectorStudent studentas;
+    VectorStudent studentas = tusciasStudentas();
     uzpildytiStudenta(studentas);
     std::ostringstream out;
 
@@ -109,7 +113,7 @@ void test_output_operator() {
 
 // Tikrina ivesties operatoriu >> : ar duomenys teisingai nuskaitomi is srauto i objekta.
 void test_input_operator() {
-    VectorStudent studentas;
+    VectorStudent studentas = tusciasStudentas();
     std::istringstream in("Ona Onaite 9 3 10 8 7");
 
     in >> studentas;
@@ -124,7 +128,7 @@ void test_input_operator() {
 }
 
 int main() {
-    test_default_constructor();
+    test_empty_constructor_values();
     test_copy_constructor();
     test_move_constructor();
     test_copy_assignment();
