@@ -130,7 +130,6 @@ public:
 
     std::string tipas() const override { return "Studentas"; }
 
-
 private:
     GradeContainer pazymiai_;
     int egzaminas_ = 0;
