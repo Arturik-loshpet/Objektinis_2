@@ -1,10 +1,8 @@
 Kaip naudotis programa:
 
-1. make - komanda sukuria failą "programa" pagal makefile.
-2. ./programa - komanda paleidžia pačią programą.
-3. make clean - išvalyti kompiliacijos failus.
-
-
+1. make clean - išvalyti kompiliacijos failus.
+2. make - komanda sukuria failą "programa" pagal makefile.
+3. ./programa - komanda paleidžia pačią programą.
 
 V0.4 testavimai
 ---------------------------------------------------------------------------------------------------------------------------
@@ -56,6 +54,10 @@ Padaryti pokyčiai - Struct pakeistas į Class.
 Greičio patikrinimas po pokyčių:
 <img width="659" height="117" alt="image" src="https://github.com/user-attachments/assets/2efeb265-9c7d-48be-8885-022c09e00e36" />
 Aiškių skirtumų tarp atlikimo laiko nėra.
+
+Paleidžiamo failo "programa" dydis yra 312Kb.
+
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 Optimizacijos Flagai.
