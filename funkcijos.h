@@ -32,7 +32,9 @@ public:
           pazymiai_(std::move(other.pazymiai_)),
           egzaminas_(other.egzaminas_),
           vidurkis_(other.vidurkis_),
-          mediana_(other.mediana_) {}
+          mediana_(other.mediana_) {
+            //pataisyta sita dali, nunulinti kintamuosius kaip int
+          }
 
     // Copy assignment operator.
     Studentas& operator=(const Studentas& other) {
