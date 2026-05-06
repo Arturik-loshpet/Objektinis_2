@@ -5,6 +5,10 @@
 #include <type_traits>
 #include <sstream>
 
+VectorStudent tusciasStudentas() {
+    return VectorStudent("", "", {}, 0, 0.0, 0.0);
+}
+
 // Uzpildo studenta pastoviais duomenimis, kad testuose butu lengva lyginti rezultatus.
 void uzpildytiStudenta(VectorStudent& studentas) {
     studentas.setVardas("Jonas");
@@ -28,21 +32,26 @@ void patikrintiStudenta(const VectorStudent& studentas) {
     assert(studentas.mediana() == 8.5);
 }
 
-// Tikrina numatyta konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
-void test_default_constructor() {
-    static_assert(std::is_abstract_v<Zmogus>, "Zmogus klase privalo buti abstrakti.");
-
-    VectorStudent studentas;
-
+void patikrintiTusciaStudenta(const VectorStudent& studentas) {
     assert(studentas.vardas().empty());
     assert(studentas.pavarde().empty());
     assert(studentas.pazymiai().empty());
     assert(studentas.egzaminas() == 0);
+    assert(studentas.vidurkis() == 0.0);
+    assert(studentas.mediana() == 0.0);
+}
+
+// Tikrina konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
+void test_empty_constructor_values() {
+    static_assert(std::is_abstract_v<Zmogus>, "Zmogus klase privalo buti abstrakti.");
+
+    VectorStudent studentas = tusciasStudentas();
+    patikrintiTusciaStudenta(studentas);
 }
 
 // Tikrina paveldimuma ir tai, kad Studentas veikia per abstrakcios bazes sasaja.
 void test_inheritance_from_zmogus() {
-    VectorStudent studentas;
+    VectorStudent studentas = tusciasStudentas();
     studentas.setVardas("Jonas");
     studentas.setPavarde("Jonaitis");
 
@@ -55,7 +64,7 @@ void test_inheritance_from_zmogus() {
 
 // Tikrina kopijavimo konstruktoriu: ar sukuriama pilna ir nepriklausoma kopija.
 void test_copy_constructor() {
-    VectorStudent pirmas;
+    VectorStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     VectorStudent antras(pirmas);
@@ -70,17 +79,18 @@ void test_copy_constructor() {
 
 // Tikrina perkelimo konstruktoriu: ar duomenys teisingai perkeliami i nauja objekta.
 void test_move_constructor() {
-    VectorStudent pirmas;
+    VectorStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     VectorStudent antras(std::move(pirmas));
     patikrintiStudenta(antras);
+    patikrintiTusciaStudenta(pirmas);
 }
 
 // Tikrina kopijavimo priskyrima: ar vienam objektui priskyrus kita, duomenys nukopijuojami teisingai.
 void test_copy_assignment() {
-    VectorStudent pirmas;
-    VectorStudent antras;
+    VectorStudent pirmas = tusciasStudentas();
+    VectorStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = pirmas;
@@ -95,8 +105,8 @@ void test_copy_assignment() {
 
 // Tikrina perkelimo priskyrima: ar duomenys teisingai perkeliami jau egzistuojanciam objektui.
 void test_move_assignment() {
-    VectorStudent pirmas;
-    VectorStudent antras;
+    VectorStudent pirmas = tusciasStudentas();
+    VectorStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = std::move(pirmas);
@@ -106,7 +116,7 @@ void test_move_assignment() {
 // Tikrina destruktoriu: objektas sukuriamas ir sunaikinamas pasibaigus bloko sričiai.
 void test_destructor() {
     {
-        VectorStudent studentas;
+        VectorStudent studentas = tusciasStudentas();
         uzpildytiStudenta(studentas);
         assert(studentas.vardas() == "Jonas");
     }
@@ -114,7 +124,7 @@ void test_destructor() {
 
 // Tikrina isvesties operatoriu << : ar studento duomenys isvedami laukiamu formatu.
 void test_output_operator() {
-    VectorStudent studentas;
+    VectorStudent studentas = tusciasStudentas();
     uzpildytiStudenta(studentas);
     std::ostringstream out;
 
@@ -125,7 +135,7 @@ void test_output_operator() {
 
 // Tikrina ivesties operatoriu >> : ar duomenys teisingai nuskaitomi is srauto i objekta.
 void test_input_operator() {
-    VectorStudent studentas;
+    VectorStudent studentas = tusciasStudentas();
     std::istringstream in("Ona Onaite 9 3 10 8 7");
 
     in >> studentas;
@@ -140,7 +150,7 @@ void test_input_operator() {
 }
 
 int main() {
-    test_default_constructor();
+    test_empty_constructor_values();
     test_inheritance_from_zmogus();
     test_copy_constructor();
     test_move_constructor();

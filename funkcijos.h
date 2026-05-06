@@ -6,12 +6,35 @@
 
 class Zmogus {
 public:
-    Zmogus() = default;
-    Zmogus(const Zmogus& other) = default;
-    Zmogus(Zmogus&& other) = default;
-    Zmogus& operator=(const Zmogus& other) = default;
-    Zmogus& operator=(Zmogus&& other) = default;
-    virtual ~Zmogus() = default;
+    Zmogus(const std::string& vardas, const std::string& pavarde)
+        : vardas_(vardas),
+          pavarde_(pavarde) {}
+
+    Zmogus(const Zmogus& other)
+        : vardas_(other.vardas_),
+          pavarde_(other.pavarde_) {}
+
+    Zmogus(Zmogus&& other)
+        : vardas_(std::move(other.vardas_)),
+          pavarde_(std::move(other.pavarde_)) {}
+
+    Zmogus& operator=(const Zmogus& other) {
+        if (this != &other) {
+            vardas_ = other.vardas_;
+            pavarde_ = other.pavarde_;
+        }
+        return *this;
+    }
+
+    Zmogus& operator=(Zmogus&& other) {
+        if (this != &other) {
+            vardas_ = std::move(other.vardas_);
+            pavarde_ = std::move(other.pavarde_);
+        }
+        return *this;
+    }
+
+    virtual ~Zmogus() {}
 
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
@@ -29,23 +52,69 @@ protected:
 template <typename GradeContainer>
 class Studentas : public Zmogus {
 public:
-    // Default constructor.
-    Studentas() = default;
+    Studentas(const std::string& vardas, const std::string& pavarde, const GradeContainer& pazymiai,
+              int egzaminas, double vidurkis, double mediana)
+        : Zmogus(vardas, pavarde),
+          pazymiai_(pazymiai),
+          egzaminas_(egzaminas),
+          vidurkis_(vidurkis),
+          mediana_(mediana) {}
 
     // Copy constructor.
-    Studentas(const Studentas& other) = default;
+    Studentas(const Studentas& other)
+        : Zmogus(other),
+          pazymiai_(other.pazymiai_),
+          egzaminas_(other.egzaminas_),
+          vidurkis_(other.vidurkis_),
+          mediana_(other.mediana_) {}
 
     // Move constructor.
-    Studentas(Studentas&& other) = default;
+    Studentas(Studentas&& other)
+        : Zmogus(std::move(other)),
+          pazymiai_(std::move(other.pazymiai_)),
+          egzaminas_(other.egzaminas_),
+          vidurkis_(other.vidurkis_),
+          mediana_(other.mediana_) {
+        other.vardas_.clear();
+        other.pavarde_.clear();
+        other.pazymiai_.clear();
+        other.egzaminas_ = 0;
+        other.vidurkis_ = 0.0;
+        other.mediana_ = 0.0;
+    }
 
     // Copy assignment operator.
-    Studentas& operator=(const Studentas& other) = default;
+    Studentas& operator=(const Studentas& other) {
+        if (this != &other) {
+            Zmogus::operator=(other);
+            pazymiai_ = other.pazymiai_;
+            egzaminas_ = other.egzaminas_;
+            vidurkis_ = other.vidurkis_;
+            mediana_ = other.mediana_;
+        }
+        return *this;
+    }
 
     // Move assignment operator.
-    Studentas& operator=(Studentas&& other) = default;
+    Studentas& operator=(Studentas&& other) {
+        if (this != &other) {
+            Zmogus::operator=(std::move(other));
+            pazymiai_ = std::move(other.pazymiai_);
+            egzaminas_ = other.egzaminas_;
+            vidurkis_ = other.vidurkis_;
+            mediana_ = other.mediana_;
+            other.vardas_.clear();
+            other.pavarde_.clear();
+            other.pazymiai_.clear();
+            other.egzaminas_ = 0;
+            other.vidurkis_ = 0.0;
+            other.mediana_ = 0.0;
+        }
+        return *this;
+    }
 
     // Destructor.
-    ~Studentas() = default;
+     ~Studentas(){}
 
     GradeContainer& pazymiai() { return pazymiai_; }
     const GradeContainer& pazymiai() const { return pazymiai_; }
@@ -445,7 +514,7 @@ void skaitymas(StudentContainer& stud, const std::string& input, double& laikas)
                 continue;
             }
 
-            Student temp;
+            Student temp("", "", {}, 0, 0.0, 0.0);
             std::istringstream laik(line);
             std::string vardas;
             std::string pavarde;
@@ -595,7 +664,7 @@ int run_program(const std::string& konteinerio_pavadinimas) {
     std::cout << "Naudojamas konteineris: " << konteinerio_pavadinimas << std::endl;
     std::cout << "Studentu Vardu ir pazymiu ivedimu sistema, skirta medianos bei vidurkio apskaiciavimui" << std::endl;
     while (true) {
-        Student temp;
+        Student temp("", "", {}, 0, 0.0, 0.0);
         int m = 0;
         while (true) {
             std::cout << "1 - ranka, 2 - generuoti tik pazymius, 3 - generuoti studentu vardus, pavardes ir pazymius, 4 - skaityti duomenis is failo, 5 - generuoti failus, 6 - baigti darba: ";
