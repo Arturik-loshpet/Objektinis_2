@@ -65,14 +65,20 @@ Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo 
 -O1:
 <img width="484" height="118" alt="image" src="https://github.com/user-attachments/assets/97e61b6a-8b9e-47d1-ba1f-4d350db4675f" />
 
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 330Kb.
+
 ---------------------------------------------------------------------------------------------------------------------------
 -O2:
 <img width="481" height="117" alt="image" src="https://github.com/user-attachments/assets/7659222b-348c-45c8-928e-2bce69b53362" />
+
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 314Kb.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 -O3:
 <img width="482" height="117" alt="image" src="https://github.com/user-attachments/assets/fb510307-4192-462a-a70b-5856c783f1c8" />
+
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 329Kb.
 
 ---------------------------------------------------------------------------------------------------------------------------
 Išvados:
@@ -90,6 +96,12 @@ Apie išvesties ir išvesties metodus:
 Kaip veikia testavimas:
 Testavimo kodas yra paleidžiamas konsolėje įvedus ./rule_of_five_test. Jis naudojamas visų naujų metodų patikrai. Kodui praėjus testavimą į konsole yra išvedama eilutė "Visi rule of five ir operatoriu testai praejo.", jeigu programa yra terminuojama, reiškias program nepraėjo testavimų.
 
+---------------------------------------------------------------------------------------------------------------------------
+V1.5 TESTAVIMAI
+
+Padaryti pokyčiai - sukurta abstrakti klasė "Zmogus", kurios išvestinė yra programos pagrindinė naudojama klasė "Studentas". Šioje klasėje yra saugomi tokie parametrai kaip vardas ir pavardė, kuriuos paveldi klasė "Studentas". "Zmogus" klasės objektus sukurti nėra įmanoma, kadangi čia yra abstrakti klasė, o jos išvestinių klasių, kaip "Studentas", objektų kūrimas yra įmanomas.
+
+Ši nauja versija palaiko visas prieš tai realizuotas funkcijas.
 
 
 
