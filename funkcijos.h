@@ -16,7 +16,10 @@ public:
 
     Zmogus(Zmogus&& other)
         : vardas_(std::move(other.vardas_)),
-          pavarde_(std::move(other.pavarde_)) {}
+          pavarde_(std::move(other.pavarde_)) {
+            other.vardas_.clear();
+            other.pavarde_.clear();
+          }
 
     Zmogus& operator=(const Zmogus& other) {
         if (this != &other) {
@@ -34,7 +37,10 @@ public:
         return *this;
     }
 
-    virtual ~Zmogus() {}
+    virtual ~Zmogus() {
+        vardas_.clear();
+        pavarde_.clear();
+    }
 
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
@@ -114,7 +120,14 @@ public:
     }
 
     // Destructor.
-     ~Studentas(){}
+     ~Studentas(){
+        vardas_.clear();
+        pavarde_.clear();
+        pazymiai_.clear();
+        egzaminas_ = 0;
+        vidurkis_ = 0.0;
+        mediana_ = 0.0;
+     }
 
     GradeContainer& pazymiai() { return pazymiai_; }
     const GradeContainer& pazymiai() const { return pazymiai_; }
