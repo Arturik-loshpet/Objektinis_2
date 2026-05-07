@@ -34,6 +34,12 @@ public:
           vidurkis_(other.vidurkis_),
           mediana_(other.mediana_) {
             //pataisyta sita dali, nunulinti kintamuosius kaip int
+            other.vardas_.clear();
+            other.pavarde_.clear();
+            other.pazymiai_.clear();
+            other.egzaminas_ = 0;
+            other.vidurkis_ = 0.0;
+            other.mediana_ = 0.0;
           }
 
     // Copy assignment operator.
@@ -63,7 +69,14 @@ public:
     }
 
     // Destructor.
-     ~Studentas(){}
+    ~Studentas() {
+    vardas_.clear();
+    pavarde_.clear();
+    pazymiai_.clear();
+    egzaminas_ = 0;
+    vidurkis_ = 0.0;
+    mediana_ = 0.0;
+    }
 
     const std::string& vardas() const { return vardas_; }
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
