@@ -1,6 +1,6 @@
 CXX = g++
 BASE_CXXFLAGS = -std=c++17 -Wall -Wextra -pedantic
-RELEASE_FLAGS = -O1 -DNDEBUG
+RELEASE_FLAGS = -O3 -DNDEBUG
 DEBUG_FLAGS = -O0 -g
 TARGET = programa
 SRC = main.cpp objektinis_patikrinimai.cpp

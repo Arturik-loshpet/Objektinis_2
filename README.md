@@ -55,9 +55,6 @@ Greičio patikrinimas po pokyčių:
 <img width="659" height="117" alt="image" src="https://github.com/user-attachments/assets/2efeb265-9c7d-48be-8885-022c09e00e36" />
 Aiškių skirtumų tarp atlikimo laiko nėra.
 
-Paleidžiamo failo "programa" dydis yra 312Kb.
-
-
 
 ---------------------------------------------------------------------------------------------------------------------------
 Optimizacijos Flagai.
@@ -66,15 +63,20 @@ Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo 
 -O1:
 <img width="484" height="118" alt="image" src="https://github.com/user-attachments/assets/97e61b6a-8b9e-47d1-ba1f-4d350db4675f" />
 
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 330Kb.
+
 ---------------------------------------------------------------------------------------------------------------------------
 -O2:
 <img width="481" height="117" alt="image" src="https://github.com/user-attachments/assets/7659222b-348c-45c8-928e-2bce69b53362" />
+
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 314Kb.
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 -O3:
 <img width="482" height="117" alt="image" src="https://github.com/user-attachments/assets/fb510307-4192-462a-a70b-5856c783f1c8" />
 
+"Programa" paleidimo failo dydis naudojant pirmą flagą - 329Kb.
 ---------------------------------------------------------------------------------------------------------------------------
 Išvados:
 Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
