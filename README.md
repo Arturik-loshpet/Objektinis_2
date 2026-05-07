@@ -90,7 +90,22 @@ Apie išvesties ir išvesties metodus:
 Kaip veikia testavimas:
 Testavimo kodas yra paleidžiamas konsolėje įvedus ./rule_of_five_test. Jis naudojamas visų naujų metodų patikrai. Kodui praėjus testavimą į konsole yra išvedama eilutė "Visi rule of five ir operatoriu testai praejo.", jeigu programa yra terminuojama, reiškias program nepraėjo testavimų.
 
+---------------------------------------------------------------------------------------------------------------------------
+V1.3 UNIT TESTAI
+Realizuoti unit testai naudojant savarankišką lengvą C++ testų karkasą `test_framework.h`.
+Karkasas palaiko:
+1. `TEST_CASE` - atskiram testavimo scenarijui aprašyti.
+2. `CHECK` - loginėms sąlygoms ir reikšmių palyginimams tikrinti.
 
+Testai paleidžiami komanda:
+1. `make test`
+
+Pateikti testai tikrina:
+1. 5-ių metodų taisyklę: kopijavimo konstruktorių, perkėlimo konstruktorių, kopijavimo priskyrimą, perkėlimo priskyrimą ir destruktorių.
+2. `Studentas` veikimą per abstrakčią `Zmogus` klasės sąsają.
+3. Įvesties ir išvesties operatorius `>>` ir `<<`.
+4. Vardo bei skaičių validacijos funkcijas.
+5. Galutinio vidurkio ir medianos skaičiavimą.
 
 
 

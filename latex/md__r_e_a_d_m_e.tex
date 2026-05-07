@@ -1,0 +1,67 @@
+\chapter{README }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
+Kaip naudotis programa:\+
+
+
+\begin{DoxyEnumerate}
+\item make clean -\/ išvalyti kompiliacijos failus.
+\item make -\/ komanda sukuria failą "{}programa"{} pagal makefile.
+\item ./\+programa -\/ komanda paleidžia pačią programą.
+\end{DoxyEnumerate}
+
+Papildoma:\+ Norint atlikti programos testavimą konsolėje reikia įrašyti komandą -\/ make test.\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysubsection{\texorpdfstring{V0.\+4 testavimai}{V0.\+4 testavimai}}\label{md__r_e_a_d_m_e_autotoc_md0}
+4 versijoj duomenų įvedimo sistemoj buvo pridėta nauja failų generavimo funkcija, kuri kuria failus pagal šablonus naudotis 2 versijoj. Buvo atlikti testavimai laiko apskaičiavimui ir jų rezultatai bus pateikti žemiau:\+ 1 testavimas:\+    Duoti testavimai turi skirtingus studentų pažymių kiekius, kad matytusi skirtumas tarp atlikimo laikų.
+
+2 testavimas (visi testai buvo atlikti su pažymių sk. = 2 ir rušiuoti pagal medianą):\+   
+
+\DoxyHorRuler{0}
+
+
+V1.\+0 testavimai Sistema:\+ CPU -\/ Apple M2 (8 branduoliai) RAM -\/ 16gb SSD -\/ 256gb
+
+\DoxyHorRuler{0}
+ 1 strategija -\/ Duomenys nuskaitomi į vieną duomenų konteinerį ir skirstymo metu masyvas skirstomas į maladiec ir lopų konteinerius. Rezultatai:\+   
+
+\DoxyHorRuler{0}
+ 2 strategija -\/ Duomenys nuskaitomi į "{}maladiec"{} konteinerį ir žmones su mažesniu vidurkiu yra įdedami i lopai konteineri ir iškerpami. Rezultatai:\+
+
+  
+
+\DoxyHorRuler{0}
+ 3 strategija -\/ Padaryta pagal 2 strategija, tik vietoj erase yra naudojamas partition algoritmas. Rezultatai:\+
+
+  
+
+\DoxyHorRuler{0}
+
+
+V1.\+1 TESTAVIMAI \hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{Padaryti pokyčiai -\/ Struct pakeistas į Class.}{Padaryti pokyčiai -\/ Struct pakeistas į Class.}}\label{md__r_e_a_d_m_e_autotoc_md6}
+Greičio patikrinimas po pokyčių:\+  Aiškių skirtumų tarp atlikimo laiko nėra.
+
+\DoxyHorRuler{0}
+ Optimizacijos Flagai. Testavimui buvo naudojami optimizacijos flagai -\/O1, -\/O2, -\/O3 ir testavimai buvo atlikti su tais pačiais failais.
+
+-\/O1:\+ 
+
+\DoxyHorRuler{0}
+ -\/O2:\+ 
+
+\DoxyHorRuler{0}
+
+
+-\/O3:\+ 
+
+\DoxyHorRuler{0}
+ Išvados:\+ Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
+
+\DoxyHorRuler{0}
+ V1.\+2 TESTAVIMAI Padaryti pokyčiai -\/ įgyvendinta "{}\+Rule of five"{} ir įvesties/\+išvesties operatoriai. Taip pat pridėtas testavimo metodas, kuris patikrina, kad visi metodai veikia.
+
+Apie išvesties ir išvesties metodus:\+
+\begin{DoxyEnumerate}
+\item perator\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} nuskaito vardą, pavardę, egzamino pažymį, pažymių kiekį ir pačius pažymius
+\item operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} išveda studento duomenis tuo pačiu formatu į failą arba į konsolę pagal vartotojo pasirinkimą.
+\item šie operatoriai buvo testuojami \doxylink{rule__of__five__test_8cpp_source}{rule\+\_\+of\+\_\+five\+\_\+test.\+cpp}
+\end{DoxyEnumerate}
+
+Kaip veikia testavimas:\+ Testavimo kodas yra paleidžiamas konsolėje įvedus ./\+rule\+\_\+of\+\_\+five\+\_\+test. Jis naudojamas visų naujų metodų patikrai. Kodui praėjus testavimą į konsole yra išvedama eilutė "{}\+Visi rule of five ir operatoriu testai praejo."{}, jeigu programa yra terminuojama, reiškias program nepraėjo testavimų. 

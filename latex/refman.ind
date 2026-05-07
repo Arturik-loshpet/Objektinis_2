@@ -1,0 +1,106 @@
+\begin{theindex}
+
+  \item {\texorpdfstring{$\sim$}{\string~}Studentas}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{12}
+  \item {\texorpdfstring{$\sim$}{\string~}Zmogus}
+    \subitem {Zmogus}, \hyperpage{16}
+
+  \indexspace
+
+  \item {egzaminas}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{12}
+  \item {egzaminas\_}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+
+  \indexspace
+
+  \item {mediana}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{12}
+  \item {mediana\_}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+
+  \indexspace
+
+  \item {operator=}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{12}
+    \subitem {Zmogus}, \hyperpage{17}
+
+  \indexspace
+
+  \item {pavarde}
+    \subitem {Zmogus}, \hyperpage{17}
+  \item {pavarde\_}
+    \subitem {Zmogus}, \hyperpage{18}
+  \item {pazymiai}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{13}
+  \item {pazymiai\_}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+
+  \indexspace
+
+  \item {README}, \hyperpage{1}
+
+  \indexspace
+
+  \item {setEgzaminas}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{13}
+  \item {setMediana}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{13}
+  \item {setPavarde}
+    \subitem {Zmogus}, \hyperpage{17}
+  \item {setVardas}
+    \subitem {Zmogus}, \hyperpage{17}
+  \item {setVidurkis}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+  \item {Studentas}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{11}
+  \item {Studentas$<$ GradeContainer $>$}, \hyperpage{9}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Studentas}, 
+		\hyperpage{12}
+    \subitem {egzaminas}, \hyperpage{12}
+    \subitem {egzaminas\_}, \hyperpage{14}
+    \subitem {mediana}, \hyperpage{12}
+    \subitem {mediana\_}, \hyperpage{14}
+    \subitem {operator=}, \hyperpage{12}
+    \subitem {pazymiai}, \hyperpage{13}
+    \subitem {pazymiai\_}, \hyperpage{14}
+    \subitem {setEgzaminas}, \hyperpage{13}
+    \subitem {setMediana}, \hyperpage{13}
+    \subitem {setVidurkis}, \hyperpage{14}
+    \subitem {Studentas}, \hyperpage{11}
+    \subitem {tipas}, \hyperpage{14}
+    \subitem {vidurkis}, \hyperpage{14}
+    \subitem {vidurkis\_}, \hyperpage{15}
+
+  \indexspace
+
+  \item {tipas}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+    \subitem {Zmogus}, \hyperpage{18}
+
+  \indexspace
+
+  \item {vardas}
+    \subitem {Zmogus}, \hyperpage{18}
+  \item {vardas\_}
+    \subitem {Zmogus}, \hyperpage{18}
+  \item {vidurkis}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{14}
+  \item {vidurkis\_}
+    \subitem {Studentas$<$ GradeContainer $>$}, \hyperpage{15}
+
+  \indexspace
+
+  \item {Zmogus}, \hyperpage{15}
+    \subitem {\texorpdfstring{$\sim$}{\string~}Zmogus}, \hyperpage{16}
+    \subitem {operator=}, \hyperpage{17}
+    \subitem {pavarde}, \hyperpage{17}
+    \subitem {pavarde\_}, \hyperpage{18}
+    \subitem {setPavarde}, \hyperpage{17}
+    \subitem {setVardas}, \hyperpage{17}
+    \subitem {tipas}, \hyperpage{18}
+    \subitem {vardas}, \hyperpage{18}
+    \subitem {vardas\_}, \hyperpage{18}
+    \subitem {Zmogus}, \hyperpage{16}
+
+\end{theindex}

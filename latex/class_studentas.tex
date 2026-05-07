@@ -1,0 +1,491 @@
+\doxysection{Studentas\texorpdfstring{$<$}{<} Grade\+Container \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_studentas}{}\label{class_studentas}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+
+
+Studentą aprašanti šabloninė klasė.  
+
+
+
+
+{\ttfamily \+\#include $<$funkcijos.\+h$>$}
+
+Inheritance diagram for Studentas\texorpdfstring{$<$}{<} Grade\+Container \texorpdfstring{$>$}{>}:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_studentas}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_studentas_a18efc9970907f7256f59274ab6d33a38}{Studentas}} (const std::\+string \&vardas, const std::\+string \&pavarde, const Grade\+Container \&pazymiai, int egzaminas, double vidurkis, double mediana)
+\begin{DoxyCompactList}\small\item\em Sukuria studento objektą su visais pagrindiniais duomenimis. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_studentas_a6d39a86886336807c7deb2e2440037c3}{Studentas}} (const \doxymbox{\hyperlink{class_studentas}{Studentas}} \&other)
+\begin{DoxyCompactList}\small\item\em Kopijavimo konstruktorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_studentas_ad274e35c30ed4703194fe47eef0ebf97}{Studentas}} (\doxymbox{\hyperlink{class_studentas}{Studentas}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Perkėlimo konstruktorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_studentas}{Studentas}} \& \doxymbox{\hyperlink{class_studentas_acda47b1fd6b6907397b1fb7a97a84e74}{operator=}} (const \doxymbox{\hyperlink{class_studentas}{Studentas}} \&other)
+\begin{DoxyCompactList}\small\item\em Kopijavimo priskyrimo operatorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_studentas}{Studentas}} \& \doxymbox{\hyperlink{class_studentas_a75e88f938cde965f3634d6771c0556e6}{operator=}} (\doxymbox{\hyperlink{class_studentas}{Studentas}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Perkėlimo priskyrimo operatorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_studentas_a1c4a914a0187b07061dbf7d6e710c0ff}{\texorpdfstring{$\sim$}{\string~}\+Studentas}} ()
+\begin{DoxyCompactList}\small\item\em Sunaikina studento objektą ir išvalo jo laukus. \end{DoxyCompactList}\item 
+Grade\+Container \& \doxymbox{\hyperlink{class_studentas_acaff9ceaca95a29276424bd13501f999}{pazymiai}} ()
+\begin{DoxyCompactList}\small\item\em Grąžina modifikuojamą namų darbų pažymių konteinerį. \end{DoxyCompactList}\item 
+const Grade\+Container \& \doxymbox{\hyperlink{class_studentas_af8835252297b1f491fc8579baf5c81ba}{pazymiai}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina tik skaitymui skirtą namų darbų pažymių konteinerį. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_studentas_a4edd5a7c6d9cb1b49b80bb411d80e7bc}{egzaminas}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina egzamino pažymį. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_studentas_a02f8bedba65c2569c6949a10f3925fa1}{set\+Egzaminas}} (int egzaminas)
+\begin{DoxyCompactList}\small\item\em Nustato egzamino pažymį. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_studentas_a0a4f6998ad6e4ff9c04ebda88514961a}{vidurkis}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina galutinį įvertinimą pagal vidurkį. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_studentas_a5634f86c6bd35f0fc2559c0ca0c7477d}{set\+Vidurkis}} (double vidurkis)
+\begin{DoxyCompactList}\small\item\em Nustato galutinį įvertinimą pagal vidurkį. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_studentas_a3b00bb9b4650f16a427de5317b1f9846}{mediana}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina galutinį įvertinimą pagal medianą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_studentas_ac1ad7120b7c59794999ed0aea1f89baf}{set\+Mediana}} (double mediana)
+\begin{DoxyCompactList}\small\item\em Nustato galutinį įvertinimą pagal medianą. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{class_studentas_ad0f770b7d8b40f30884503cf4e3eaed4}{tipas}} () const override
+\begin{DoxyCompactList}\small\item\em Grąžina objekto tipą. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_zmogus}{Zmogus}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_zmogus_ae6bfb71e4c8fddf15f3a19b4bcd6fd26}{Zmogus}} (const std::\+string \&vardas, const std::\+string \&pavarde)
+\begin{DoxyCompactList}\small\item\em Sukuria žmogaus objektą su vardu ir pavarde. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_zmogus_a9d2bbeaf83ead87dbb686ee04999885f}{Zmogus}} (const \doxymbox{\hyperlink{class_zmogus}{Zmogus}} \&other)
+\begin{DoxyCompactList}\small\item\em Kopijavimo konstruktorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_zmogus_a7801d9879facef3e31fdaf2fbf6bfe73}{Zmogus}} (\doxymbox{\hyperlink{class_zmogus}{Zmogus}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Perkėlimo konstruktorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_zmogus}{Zmogus}} \& \doxymbox{\hyperlink{class_zmogus_a8bc6d11547d75c71a38567f750f02612}{operator=}} (const \doxymbox{\hyperlink{class_zmogus}{Zmogus}} \&other)
+\begin{DoxyCompactList}\small\item\em Kopijavimo priskyrimo operatorius. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_zmogus}{Zmogus}} \& \doxymbox{\hyperlink{class_zmogus_a58da7b43a10ba4857e68ce237016695e}{operator=}} (\doxymbox{\hyperlink{class_zmogus}{Zmogus}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Perkėlimo priskyrimo operatorius. \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{class_zmogus_ac5615bf607a8f2f1b303ffa04328d24d}{\texorpdfstring{$\sim$}{\string~}\+Zmogus}} ()
+\begin{DoxyCompactList}\small\item\em Virtualus destruktorius. \end{DoxyCompactList}\item 
+const std::\+string \& \doxymbox{\hyperlink{class_zmogus_ac21ab5fa524d6d0a75ca4cbfa2df113c}{vardas}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina žmogaus vardą. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_zmogus_a6024e8fb5c3a9fbd48ca522f976f8465}{set\+Vardas}} (const std::\+string \&vardas)
+\begin{DoxyCompactList}\small\item\em Nustato žmogaus vardą. \end{DoxyCompactList}\item 
+const std::\+string \& \doxymbox{\hyperlink{class_zmogus_a67cbc20c9554324502d140eb05370be8}{pavarde}} () const
+\begin{DoxyCompactList}\small\item\em Grąžina žmogaus pavardę. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_zmogus_ae4c3b02e68af5ed87c68101ba699539c}{set\+Pavarde}} (const std::\+string \&pavarde)
+\begin{DoxyCompactList}\small\item\em Nustato žmogaus pavardę. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Grade\+Container \doxymbox{\hyperlink{class_studentas_ac54294cc3d0fed0869b3acacbfdd5a86}{pazymiai\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Namų darbų pažymiai. \end{DoxyCompactList}\item 
+int \doxymbox{\hyperlink{class_studentas_a54f048b579d5e883d2f6d9b8b7da1bdd}{egzaminas\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em Egzamino pažymys. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_studentas_a5411ed09570f98725bb746ee4f2982dd}{vidurkis\+\_\+}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Galutinis įvertinimas pagal vidurkį. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{class_studentas_a504d8a917953dbda8b22f55a71ba9294}{mediana\+\_\+}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Galutinis įvertinimas pagal medianą. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_zmogus}{Zmogus}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+string \doxymbox{\hyperlink{class_zmogus_a80e72cd553492344884a264a72ce33d2}{vardas\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Žmogaus vardas. \end{DoxyCompactList}\item 
+std::\+string \doxymbox{\hyperlink{class_zmogus_a85cd6103a5f887059263d15413a3f081}{pavarde\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Žmogaus pavardė. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Grade\+Container$>$\newline
+class Studentas$<$ Grade\+Container $>$}
+Studentą aprašanti šabloninė klasė. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Grade\+Container} & Konteinerio tipas namų darbų pažymiams saugoti.\\
+\hline
+\end{DoxyTemplParams}
+Klasė saugo studento vardą, pavardę, namų darbų pažymius, egzamino rezultatą ir galutinius įvertinimus pagal vidurkį bei medianą. 
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00122}{122}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+
+
+\label{class_studentas_doc-constructors}
+\Hypertarget{class_studentas_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_studentas_a18efc9970907f7256f59274ab6d33a38}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!Studentas@{Studentas}}
+\index{Studentas@{Studentas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{Studentas()}{Studentas()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_studentas_a18efc9970907f7256f59274ab6d33a38} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+\+Studentas (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{vardas}{, }\item[{const std::\+string \&}]{pavarde}{, }\item[{const Grade\+Container \&}]{pazymiai}{, }\item[{int}]{egzaminas}{, }\item[{double}]{vidurkis}{, }\item[{double}]{mediana}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sukuria studento objektą su visais pagrindiniais duomenimis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vardas} & Studento vardas. \\
+\hline
+{\em pavarde} & Studento pavardė. \\
+\hline
+{\em pazymiai} & Namų darbų pažymių konteineris. \\
+\hline
+{\em egzaminas} & Egzamino pažymys. \\
+\hline
+{\em vidurkis} & Galutinis įvertinimas pagal vidurkį. \\
+\hline
+{\em mediana} & Galutinis įvertinimas pagal medianą. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00133}{133}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a6d39a86886336807c7deb2e2440037c3}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!Studentas@{Studentas}}
+\index{Studentas@{Studentas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{Studentas()}{Studentas()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_studentas_a6d39a86886336807c7deb2e2440037c3} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+\+Studentas (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Kopijavimo konstruktorius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Kopijuojamas studentas. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00145}{145}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_ad274e35c30ed4703194fe47eef0ebf97}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!Studentas@{Studentas}}
+\index{Studentas@{Studentas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{Studentas()}{Studentas()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_studentas_ad274e35c30ed4703194fe47eef0ebf97} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+\+Studentas (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Perkėlimo konstruktorius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \doxylink{class_studentas}{Studentas}, iš kurio perkeliami duomenys. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00156}{156}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a1c4a914a0187b07061dbf7d6e710c0ff}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!````~Studentas@{\texorpdfstring{$\sim$}{\string~}Studentas}}
+\index{````~Studentas@{\texorpdfstring{$\sim$}{\string~}Studentas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Studentas()}{\string~Studentas()}}
+{\footnotesize\ttfamily \label{class_studentas_a1c4a914a0187b07061dbf7d6e710c0ff} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{class_studentas}{Studentas}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sunaikina studento objektą ir išvalo jo laukus. 
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00211}{211}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+
+
+\label{class_studentas_doc-func-members}
+\Hypertarget{class_studentas_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_studentas_a4edd5a7c6d9cb1b49b80bb411d80e7bc}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!egzaminas@{egzaminas}}
+\index{egzaminas@{egzaminas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{egzaminas()}{egzaminas()}}
+{\footnotesize\ttfamily \label{class_studentas_a4edd5a7c6d9cb1b49b80bb411d80e7bc} 
+template$<$typename Grade\+Container$>$ \\
+int \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+egzaminas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grąžina egzamino pažymį. 
+
+\begin{DoxyReturn}{Returns}
+Egzamino pažymys. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00236}{236}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a3b00bb9b4650f16a427de5317b1f9846}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!mediana@{mediana}}
+\index{mediana@{mediana}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{mediana()}{mediana()}}
+{\footnotesize\ttfamily \label{class_studentas_a3b00bb9b4650f16a427de5317b1f9846} 
+template$<$typename Grade\+Container$>$ \\
+double \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+mediana (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grąžina galutinį įvertinimą pagal medianą. 
+
+\begin{DoxyReturn}{Returns}
+Galutinis įvertinimas pagal medianą. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00260}{260}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_acda47b1fd6b6907397b1fb7a97a84e74}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_studentas_acda47b1fd6b6907397b1fb7a97a84e74} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}} \& \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+operator= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Kopijavimo priskyrimo operatorius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & Kopijuojamas studentas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nuoroda į šį studentą. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00175}{175}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a75e88f938cde965f3634d6771c0556e6}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_studentas_a75e88f938cde965f3634d6771c0556e6} 
+template$<$typename Grade\+Container$>$ \\
+\doxymbox{\hyperlink{class_studentas}{Studentas}} \& \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Perkėlimo priskyrimo operatorius. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \doxylink{class_studentas}{Studentas}, iš kurio perkeliami duomenys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nuoroda į šį studentą. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00191}{191}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_acaff9ceaca95a29276424bd13501f999}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!pazymiai@{pazymiai}}
+\index{pazymiai@{pazymiai}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{pazymiai()}{pazymiai()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_studentas_acaff9ceaca95a29276424bd13501f999} 
+template$<$typename Grade\+Container$>$ \\
+Grade\+Container \& \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+pazymiai (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grąžina modifikuojamą namų darbų pažymių konteinerį. 
+
+\begin{DoxyReturn}{Returns}
+Nuoroda į pažymių konteinerį. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00224}{224}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_af8835252297b1f491fc8579baf5c81ba}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!pazymiai@{pazymiai}}
+\index{pazymiai@{pazymiai}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{pazymiai()}{pazymiai()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_studentas_af8835252297b1f491fc8579baf5c81ba} 
+template$<$typename Grade\+Container$>$ \\
+const Grade\+Container \& \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+pazymiai (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grąžina tik skaitymui skirtą namų darbų pažymių konteinerį. 
+
+\begin{DoxyReturn}{Returns}
+Konstantinė nuoroda į pažymių konteinerį. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00230}{230}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a02f8bedba65c2569c6949a10f3925fa1}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!setEgzaminas@{setEgzaminas}}
+\index{setEgzaminas@{setEgzaminas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{setEgzaminas()}{setEgzaminas()}}
+{\footnotesize\ttfamily \label{class_studentas_a02f8bedba65c2569c6949a10f3925fa1} 
+template$<$typename Grade\+Container$>$ \\
+void \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+set\+Egzaminas (\begin{DoxyParamCaption}\item[{int}]{egzaminas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Nustato egzamino pažymį. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em egzaminas} & Naujas egzamino pažymys. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00242}{242}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_ac1ad7120b7c59794999ed0aea1f89baf}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!setMediana@{setMediana}}
+\index{setMediana@{setMediana}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{setMediana()}{setMediana()}}
+{\footnotesize\ttfamily \label{class_studentas_ac1ad7120b7c59794999ed0aea1f89baf} 
+template$<$typename Grade\+Container$>$ \\
+void \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+set\+Mediana (\begin{DoxyParamCaption}\item[{double}]{mediana}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Nustato galutinį įvertinimą pagal medianą. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mediana} & Nauja galutinės medianos reikšmė. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00266}{266}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a5634f86c6bd35f0fc2559c0ca0c7477d}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!setVidurkis@{setVidurkis}}
+\index{setVidurkis@{setVidurkis}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{setVidurkis()}{setVidurkis()}}
+{\footnotesize\ttfamily \label{class_studentas_a5634f86c6bd35f0fc2559c0ca0c7477d} 
+template$<$typename Grade\+Container$>$ \\
+void \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+set\+Vidurkis (\begin{DoxyParamCaption}\item[{double}]{vidurkis}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Nustato galutinį įvertinimą pagal vidurkį. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vidurkis} & Nauja galutinio vidurkio reikšmė. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00254}{254}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_ad0f770b7d8b40f30884503cf4e3eaed4}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!tipas@{tipas}}
+\index{tipas@{tipas}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{tipas()}{tipas()}}
+{\footnotesize\ttfamily \label{class_studentas_ad0f770b7d8b40f30884503cf4e3eaed4} 
+template$<$typename Grade\+Container$>$ \\
+std::\+string \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+tipas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Grąžina objekto tipą. 
+
+\begin{DoxyReturn}{Returns}
+Tekstas "{}\+Studentas"{}. 
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{class_zmogus_ac0cbaff86ba113aa32e72c13fc208818}{Zmogus}}.
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00272}{272}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a0a4f6998ad6e4ff9c04ebda88514961a}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!vidurkis@{vidurkis}}
+\index{vidurkis@{vidurkis}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{vidurkis()}{vidurkis()}}
+{\footnotesize\ttfamily \label{class_studentas_a0a4f6998ad6e4ff9c04ebda88514961a} 
+template$<$typename Grade\+Container$>$ \\
+double \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+vidurkis (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grąžina galutinį įvertinimą pagal vidurkį. 
+
+\begin{DoxyReturn}{Returns}
+Galutinis įvertinimas pagal vidurkį. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00248}{248}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+
+
+\label{class_studentas_doc-variable-members}
+\Hypertarget{class_studentas_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_studentas_a54f048b579d5e883d2f6d9b8b7da1bdd}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!egzaminas\_@{egzaminas\_}}
+\index{egzaminas\_@{egzaminas\_}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{egzaminas\_}{egzaminas\_}}
+{\footnotesize\ttfamily \label{class_studentas_a54f048b579d5e883d2f6d9b8b7da1bdd} 
+template$<$typename Grade\+Container$>$ \\
+int \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+egzaminas\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Egzamino pažymys. 
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00278}{278}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a504d8a917953dbda8b22f55a71ba9294}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!mediana\_@{mediana\_}}
+\index{mediana\_@{mediana\_}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{mediana\_}{mediana\_}}
+{\footnotesize\ttfamily \label{class_studentas_a504d8a917953dbda8b22f55a71ba9294} 
+template$<$typename Grade\+Container$>$ \\
+double \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+mediana\+\_\+ = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Galutinis įvertinimas pagal medianą. 
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00282}{282}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_ac54294cc3d0fed0869b3acacbfdd5a86}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!pazymiai\_@{pazymiai\_}}
+\index{pazymiai\_@{pazymiai\_}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{pazymiai\_}{pazymiai\_}}
+{\footnotesize\ttfamily \label{class_studentas_ac54294cc3d0fed0869b3acacbfdd5a86} 
+template$<$typename Grade\+Container$>$ \\
+Grade\+Container \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+pazymiai\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Namų darbų pažymiai. 
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00276}{276}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+\Hypertarget{class_studentas_a5411ed09570f98725bb746ee4f2982dd}\index{Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}!vidurkis\_@{vidurkis\_}}
+\index{vidurkis\_@{vidurkis\_}!Studentas$<$ GradeContainer $>$@{Studentas$<$ GradeContainer $>$}}
+\doxysubsubsection{\texorpdfstring{vidurkis\_}{vidurkis\_}}
+{\footnotesize\ttfamily \label{class_studentas_a5411ed09570f98725bb746ee4f2982dd} 
+template$<$typename Grade\+Container$>$ \\
+double \doxymbox{\hyperlink{class_studentas}{Studentas}}$<$ Grade\+Container $>$::\+vidurkis\+\_\+ = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Galutinis įvertinimas pagal vidurkį. 
+
+
+
+Definition at line \doxymbox{\hyperlink{funkcijos_8h_source_l00280}{280}} of file \doxymbox{\hyperlink{funkcijos_8h_source}{funkcijos.\+h}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+funkcijos.\+h\end{DoxyCompactItemize}
