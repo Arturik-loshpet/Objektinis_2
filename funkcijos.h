@@ -19,7 +19,10 @@ public:
     ~Studentas(){
         vardas_.clear();
         pavarde_.clear();
-        
+        pazymiai_.clear();
+        egzaminas_ = 0;
+        vidurkis_ = 0.0;
+        mediana_ = 0.0;
     }
 
     const std::string& vardas() const { return vardas_; }
