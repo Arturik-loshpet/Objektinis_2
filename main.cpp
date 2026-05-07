@@ -2,6 +2,14 @@
 #include "library.h"
 #include "patikrinimai.h"
 
+/**
+ * @brief Pagrindinis programos įėjimo taškas.
+ *
+ * Vartotojas pasirenka studentų konteinerio tipą, o tada paleidžiama bendra
+ * programos eiga su pasirinktu konteineriu.
+ *
+ * @return Programos pabaigos kodas.
+ */
 int main() {
     std::string input;
 

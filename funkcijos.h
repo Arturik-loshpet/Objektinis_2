@@ -4,16 +4,35 @@
 #include "library.h"
 #include "patikrinimai.h"
 
+/**
+ * @brief Abstrakti bazinė klasė žmogaus vardui ir pavardei saugoti.
+ *
+ * Klasė naudojama kaip bendras pagrindas konkretiems asmenų tipams. Ji turi
+ * virtualų metodą tipui nustatyti, todėl tiesiogiai objektų iš jos kurti negalima.
+ */
 class Zmogus {
 public:
+    /**
+     * @brief Sukuria žmogaus objektą su vardu ir pavarde.
+     * @param vardas Žmogaus vardas.
+     * @param pavarde Žmogaus pavardė.
+     */
     Zmogus(const std::string& vardas, const std::string& pavarde)
         : vardas_(vardas),
           pavarde_(pavarde) {}
 
+    /**
+     * @brief Kopijavimo konstruktorius.
+     * @param other Kopijuojamas objektas.
+     */
     Zmogus(const Zmogus& other)
         : vardas_(other.vardas_),
           pavarde_(other.pavarde_) {}
 
+    /**
+     * @brief Perkėlimo konstruktorius.
+     * @param other Objektas, iš kurio perkeliami duomenys.
+     */
     Zmogus(Zmogus&& other)
         : vardas_(std::move(other.vardas_)),
           pavarde_(std::move(other.pavarde_)) {
@@ -21,6 +40,11 @@ public:
             other.pavarde_.clear();
           }
 
+    /**
+     * @brief Kopijavimo priskyrimo operatorius.
+     * @param other Kopijuojamas objektas.
+     * @return Nuoroda į šį objektą.
+     */
     Zmogus& operator=(const Zmogus& other) {
         if (this != &other) {
             vardas_ = other.vardas_;
@@ -29,6 +53,11 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Perkėlimo priskyrimo operatorius.
+     * @param other Objektas, iš kurio perkeliami duomenys.
+     * @return Nuoroda į šį objektą.
+     */
     Zmogus& operator=(Zmogus&& other) {
         if (this != &other) {
             vardas_ = std::move(other.vardas_);
@@ -37,27 +66,70 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Virtualus destruktorius.
+     */
     virtual ~Zmogus() {
         vardas_.clear();
         pavarde_.clear();
     }
 
+    /**
+     * @brief Grąžina žmogaus vardą.
+     * @return Konstantinė nuoroda į vardą.
+     */
     const std::string& vardas() const { return vardas_; }
+
+    /**
+     * @brief Nustato žmogaus vardą.
+     * @param vardas Naujas vardas.
+     */
     void setVardas(const std::string& vardas) { vardas_ = vardas; }
 
+    /**
+     * @brief Grąžina žmogaus pavardę.
+     * @return Konstantinė nuoroda į pavardę.
+     */
     const std::string& pavarde() const { return pavarde_; }
+
+    /**
+     * @brief Nustato žmogaus pavardę.
+     * @param pavarde Nauja pavardė.
+     */
     void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
 
+    /**
+     * @brief Grąžina konkretaus objekto tipą.
+     * @return Tipo pavadinimas tekstu.
+     */
     virtual std::string tipas() const = 0;
 
 protected:
+    /** @brief Žmogaus vardas. */
     std::string vardas_;
+    /** @brief Žmogaus pavardė. */
     std::string pavarde_;
 };
 
+/**
+ * @brief Studentą aprašanti šabloninė klasė.
+ * @tparam GradeContainer Konteinerio tipas namų darbų pažymiams saugoti.
+ *
+ * Klasė saugo studento vardą, pavardę, namų darbų pažymius, egzamino rezultatą
+ * ir galutinius įvertinimus pagal vidurkį bei medianą.
+ */
 template <typename GradeContainer>
 class Studentas : public Zmogus {
 public:
+    /**
+     * @brief Sukuria studento objektą su visais pagrindiniais duomenimis.
+     * @param vardas Studento vardas.
+     * @param pavarde Studento pavardė.
+     * @param pazymiai Namų darbų pažymių konteineris.
+     * @param egzaminas Egzamino pažymys.
+     * @param vidurkis Galutinis įvertinimas pagal vidurkį.
+     * @param mediana Galutinis įvertinimas pagal medianą.
+     */
     Studentas(const std::string& vardas, const std::string& pavarde, const GradeContainer& pazymiai,
               int egzaminas, double vidurkis, double mediana)
         : Zmogus(vardas, pavarde),
@@ -66,7 +138,10 @@ public:
           vidurkis_(vidurkis),
           mediana_(mediana) {}
 
-    // Copy constructor.
+    /**
+     * @brief Kopijavimo konstruktorius.
+     * @param other Kopijuojamas studentas.
+     */
     Studentas(const Studentas& other)
         : Zmogus(other),
           pazymiai_(other.pazymiai_),
@@ -74,7 +149,10 @@ public:
           vidurkis_(other.vidurkis_),
           mediana_(other.mediana_) {}
 
-    // Move constructor.
+    /**
+     * @brief Perkėlimo konstruktorius.
+     * @param other Studentas, iš kurio perkeliami duomenys.
+     */
     Studentas(Studentas&& other)
         : Zmogus(std::move(other)),
           pazymiai_(std::move(other.pazymiai_)),
@@ -89,7 +167,11 @@ public:
         other.mediana_ = 0.0;
     }
 
-    // Copy assignment operator.
+    /**
+     * @brief Kopijavimo priskyrimo operatorius.
+     * @param other Kopijuojamas studentas.
+     * @return Nuoroda į šį studentą.
+     */
     Studentas& operator=(const Studentas& other) {
         if (this != &other) {
             Zmogus::operator=(other);
@@ -101,7 +183,11 @@ public:
         return *this;
     }
 
-    // Move assignment operator.
+    /**
+     * @brief Perkėlimo priskyrimo operatorius.
+     * @param other Studentas, iš kurio perkeliami duomenys.
+     * @return Nuoroda į šį studentą.
+     */
     Studentas& operator=(Studentas&& other) {
         if (this != &other) {
             Zmogus::operator=(std::move(other));
@@ -119,7 +205,9 @@ public:
         return *this;
     }
 
-    // Destructor.
+    /**
+     * @brief Sunaikina studento objektą ir išvalo jo laukus.
+     */
      ~Studentas(){
         vardas_.clear();
         pavarde_.clear();
@@ -129,34 +217,92 @@ public:
         mediana_ = 0.0;
      }
 
+    /**
+     * @brief Grąžina modifikuojamą namų darbų pažymių konteinerį.
+     * @return Nuoroda į pažymių konteinerį.
+     */
     GradeContainer& pazymiai() { return pazymiai_; }
+
+    /**
+     * @brief Grąžina tik skaitymui skirtą namų darbų pažymių konteinerį.
+     * @return Konstantinė nuoroda į pažymių konteinerį.
+     */
     const GradeContainer& pazymiai() const { return pazymiai_; }
 
+    /**
+     * @brief Grąžina egzamino pažymį.
+     * @return Egzamino pažymys.
+     */
     int egzaminas() const { return egzaminas_; }
+
+    /**
+     * @brief Nustato egzamino pažymį.
+     * @param egzaminas Naujas egzamino pažymys.
+     */
     void setEgzaminas(int egzaminas) { egzaminas_ = egzaminas; }
 
+    /**
+     * @brief Grąžina galutinį įvertinimą pagal vidurkį.
+     * @return Galutinis įvertinimas pagal vidurkį.
+     */
     double vidurkis() const { return vidurkis_; }
+
+    /**
+     * @brief Nustato galutinį įvertinimą pagal vidurkį.
+     * @param vidurkis Nauja galutinio vidurkio reikšmė.
+     */
     void setVidurkis(double vidurkis) { vidurkis_ = vidurkis; }
 
+    /**
+     * @brief Grąžina galutinį įvertinimą pagal medianą.
+     * @return Galutinis įvertinimas pagal medianą.
+     */
     double mediana() const { return mediana_; }
+
+    /**
+     * @brief Nustato galutinį įvertinimą pagal medianą.
+     * @param mediana Nauja galutinės medianos reikšmė.
+     */
     void setMediana(double mediana) { mediana_ = mediana; }
 
+    /**
+     * @brief Grąžina objekto tipą.
+     * @return Tekstas "Studentas".
+     */
     std::string tipas() const override { return "Studentas"; }
 
 private:
+    /** @brief Namų darbų pažymiai. */
     GradeContainer pazymiai_;
+    /** @brief Egzamino pažymys. */
     int egzaminas_ = 0;
+    /** @brief Galutinis įvertinimas pagal vidurkį. */
     double vidurkis_ = 0.0;
+    /** @brief Galutinis įvertinimas pagal medianą. */
     double mediana_ = 0.0;
 };
+
+/** @brief Studentas, kurio pažymiai saugomi std::vector konteineryje. */
 using VectorStudent = Studentas<std::vector<int>>;
+/** @brief Studentas, kurio pažymiai saugomi std::list konteineryje. */
 using ListStudent = Studentas<std::list<int>>;
+/** @brief Studentas, kurio pažymiai saugomi std::deque konteineryje. */
 using DequeStudent = Studentas<std::deque<int>>;
 
+/** @brief Studentų std::vector konteinerio tipas. */
 using VectorContainer = std::vector<VectorStudent>;
+/** @brief Studentų std::list konteinerio tipas. */
 using ListContainer = std::list<ListStudent>;
+/** @brief Studentų std::deque konteinerio tipas. */
 using DequeContainer = std::deque<DequeStudent>;
 
+/**
+ * @brief Išveda studento duomenis į srautą.
+ * @tparam GradeContainer Pažymių konteinerio tipas.
+ * @param out Išvesties srautas.
+ * @param studentas Išvedamas studentas.
+ * @return Nuoroda į išvesties srautą.
+ */
 template <typename GradeContainer>
 std::ostream& operator<<(std::ostream& out, const Studentas<GradeContainer>& studentas) {
     out << studentas.vardas() << " "
@@ -171,6 +317,13 @@ std::ostream& operator<<(std::ostream& out, const Studentas<GradeContainer>& stu
     return out;
 }
 
+/**
+ * @brief Nuskaito studento duomenis iš srauto.
+ * @tparam GradeContainer Pažymių konteinerio tipas.
+ * @param in Įvesties srautas.
+ * @param studentas Studentas, į kurį įrašomi nuskaityti duomenys.
+ * @return Nuoroda į įvesties srautą.
+ */
 template <typename GradeContainer>
 std::istream& operator>>(std::istream& in, Studentas<GradeContainer>& studentas) {
     std::string vardas;
@@ -199,16 +352,37 @@ std::istream& operator>>(std::istream& in, Studentas<GradeContainer>& studentas)
 }
 
 
+/**
+ * @brief Rikiuoja std::list konteinerį pagal perduotą palyginimo funkciją.
+ * @tparam T Sąrašo elemento tipas.
+ * @tparam Allocator Sąrašo atminties skyriklio tipas.
+ * @tparam Compare Palyginimo funkcijos tipas.
+ * @param container Rikiuojamas sąrašas.
+ * @param comp Palyginimo funkcija.
+ */
 template <typename T, typename Allocator, typename Compare>
 void sort_container(std::list<T, Allocator>& container, Compare comp) {
     container.sort(comp);
 }
 
+/**
+ * @brief Rikiuoja atsitiktinės prieigos konteinerį pagal perduotą palyginimo funkciją.
+ * @tparam Container Konteinerio tipas.
+ * @tparam Compare Palyginimo funkcijos tipas.
+ * @param container Rikiuojamas konteineris.
+ * @param comp Palyginimo funkcija.
+ */
 template <typename Container, typename Compare>
 void sort_container(Container& container, Compare comp) {
     std::sort(container.begin(), container.end(), comp);
 }
 
+/**
+ * @brief Apskaičiuoja pažymių medianą.
+ * @tparam GradeContainer Pažymių konteinerio tipas.
+ * @param paz Pažymių konteineris; funkcija jį surikiuoja didėjimo tvarka.
+ * @return Pažymių mediana arba 0.0, jei konteineris tuščias.
+ */
 template <typename GradeContainer>
 double skaiciuoti_mediana(GradeContainer& paz) {
     if (paz.empty()) {
@@ -232,6 +406,12 @@ double skaiciuoti_mediana(GradeContainer& paz) {
     return static_cast<double>(*mid);
 }
 
+/**
+ * @brief Paklausia, kiek pažymių turi studentas.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kurio vardas ir pavardė naudojami klausime.
+ * @param m Kintamasis, į kurį įrašomas pažymių kiekis.
+ */
 template <typename Student>
 void paz_sk(Student& temp, int& m) {
     std::string input;
@@ -251,6 +431,12 @@ void paz_sk(Student& temp, int& m) {
     }
 }
 
+/**
+ * @brief Leidžia vartotojui ranka įvesti studento namų darbų pažymius.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam pridedami pažymiai.
+ * @param m Įvedamų pažymių kiekis.
+ */
 template <typename Student>
 void paz_ivestis_ranka(Student& temp, int m) {
     std::string input;
@@ -269,6 +455,11 @@ void paz_ivestis_ranka(Student& temp, int m) {
     }
 }
 
+/**
+ * @brief Leidžia vartotojui ranka įvesti studento egzamino pažymį.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam nustatomas egzamino pažymys.
+ */
 template <typename Student>
 void egz_ivestis_ranka(Student& temp) {
     std::string input;
@@ -287,6 +478,12 @@ void egz_ivestis_ranka(Student& temp) {
     }
 }
 
+/**
+ * @brief Leidžia vartotojui ranka įvesti studento vardą ir pavardę.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam nustatomas vardas ir pavardė.
+ * @param current_count Dabartinis jau įvestų studentų skaičius.
+ */
 template <typename Student>
 void vardu_ivedimas_ranka(Student& temp, std::size_t current_count) {
     while (true) {
@@ -312,6 +509,12 @@ void vardu_ivedimas_ranka(Student& temp, std::size_t current_count) {
     }
 }
 
+/**
+ * @brief Sugeneruoja atsitiktinius studento namų darbų pažymius.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam pridedami sugeneruoti pažymiai.
+ * @param m Generuojamų pažymių kiekis.
+ */
 template <typename Student>
 void paz_ivestis_random(Student& temp, int m) {
     std::random_device rd;
@@ -322,6 +525,11 @@ void paz_ivestis_random(Student& temp, int m) {
     }
 }
 
+/**
+ * @brief Sugeneruoja atsitiktinį studento egzamino pažymį.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam nustatomas sugeneruotas egzamino pažymys.
+ */
 template <typename Student>
 void egz_ivestis_random(Student& temp) {
     std::random_device rd;
@@ -330,6 +538,11 @@ void egz_ivestis_random(Student& temp) {
     temp.setEgzaminas(dist(gen));
 }
 
+/**
+ * @brief Sugeneruoja atsitiktinį studento vardą ir pavardę.
+ * @tparam Student Studento tipas.
+ * @param temp Studentas, kuriam nustatomas sugeneruotas vardas ir pavardė.
+ */
 template <typename Student>
 void vardu_ivedimas_random(Student& temp) {
     static const std::vector<std::string> vard = {
@@ -349,6 +562,11 @@ void vardu_ivedimas_random(Student& temp) {
     temp.setPavarde(pav[r]);
 }
 
+/**
+ * @brief Apskaičiuoja galutinį įvertinimą pagal vidurkį visiems studentams.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Studentų konteineris, kurio elementų vidurkio laukas atnaujinamas.
+ */
 template <typename StudentContainer>
 void vidurkis(StudentContainer& stud) {
     for (auto& studentas : stud) {
@@ -361,6 +579,11 @@ void vidurkis(StudentContainer& stud) {
     }
 }
 
+/**
+ * @brief Apskaičiuoja galutinį įvertinimą pagal medianą visiems studentams.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Studentų konteineris, kurio elementų medianos laukas atnaujinamas.
+ */
 template <typename StudentContainer>
 void mediana(StudentContainer& stud) {
     for (auto& studentas : stud) {
@@ -368,6 +591,11 @@ void mediana(StudentContainer& stud) {
     }
 }
 
+/**
+ * @brief Išveda studentų rezultatus į konsolę pagal vartotojo pasirinktą kriterijų.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Studentų konteineris, kurio duomenys išvedami.
+ */
 template <typename StudentContainer>
 void isvestis(StudentContainer& stud) {
     std::string input;
@@ -400,6 +628,12 @@ void isvestis(StudentContainer& stud) {
     }
 }
 
+/**
+ * @brief Rikiuoja studentus pagal vartotojo pasirinktą lauką ir matuoja rikiavimo laiką.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Rikiuojamas studentų konteineris.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama rikiavimo trukmė.
+ */
 template <typename StudentContainer>
 void rusiavimas(StudentContainer& stud, double& laikas) {
     std::string input;
@@ -431,6 +665,13 @@ void rusiavimas(StudentContainer& stud, double& laikas) {
     }
 }
 
+/**
+ * @brief Sugeneruoja studentų duomenų failą ir pamatuoja rašymo laiką.
+ * @param name Kuriamo failo pavadinimas.
+ * @param zmones Generuojamų studentų skaičius.
+ * @param m Namų darbų pažymių kiekis kiekvienam studentui.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama rašymo trukmė.
+ */
 inline void failu_kurimas(const std::string& name, int zmones, int m, double& laikas) {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -458,6 +699,11 @@ inline void failu_kurimas(const std::string& name, int zmones, int m, double& la
     laikas += trukme.count();
 }
 
+/**
+ * @brief Išveda studentų rezultatus į konsolę arba į failą.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Studentų konteineris, kurio duomenys išvedami.
+ */
 template <typename StudentContainer>
 void isvestis_failas(StudentContainer& stud) {
     std::string input;
@@ -492,6 +738,13 @@ void isvestis_failas(StudentContainer& stud) {
     }
 }
 
+/**
+ * @brief Nuskaito studentų duomenis iš failo.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Konteineris, į kurį įrašomi nuskaityti studentai.
+ * @param input Skaitomo failo kelias arba pavadinimas.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama skaitymo trukmė.
+ */
 template <typename StudentContainer>
 void skaitymas(StudentContainer& stud, const std::string& input, double& laikas) {
     using Student = typename StudentContainer::value_type;
@@ -570,6 +823,14 @@ void skaitymas(StudentContainer& stud, const std::string& input, double& laikas)
     }
 }
 
+/**
+ * @brief Padalija studentus į du konteinerius pagal galutinį vidurkį.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Paliktas suderinamumui su ankstesne funkcijos sąsaja.
+ * @param maladiec Konteineris, kuriame lieka studentai, turintys bent 5 balų vidurkį.
+ * @param lopai Konteineris, į kurį perkeliami studentai, turintys mažesnį nei 5 balų vidurkį.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama skirstymo trukmė.
+ */
 template <typename StudentContainer>
 void skirstymas(StudentContainer& stud, StudentContainer& maladiec, StudentContainer& lopai, double& laikas) {
     const auto pradzia = std::chrono::high_resolution_clock::now();
@@ -590,6 +851,13 @@ void skirstymas(StudentContainer& stud, StudentContainer& maladiec, StudentConta
     laikas += trukme.count();
 }
 
+/**
+ * @brief Įrašo studentų rezultatus į nurodytą failą.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param a Studentų konteineris, kurio duomenys rašomi.
+ * @param name Rezultatų failo pavadinimas.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama rašymo trukmė.
+ */
 template <typename StudentContainer>
 void rasymas(const StudentContainer& a, const std::string& name, double& laikas) {
     const auto pradzia = std::chrono::high_resolution_clock::now();
@@ -610,6 +878,14 @@ void rasymas(const StudentContainer& a, const std::string& name, double& laikas)
     laikas += trukme.count();
 }
 
+/**
+ * @brief Atlieka failo duomenų apdorojimo testavimą.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Paliktas suderinamumui su skirstymo funkcijos sąsaja.
+ * @param maladiec Konteineris su nuskaitytais studentais ir vėliau gerais rezultatais.
+ * @param lopai Konteineris studentams, kurių vidurkis mažesnis nei 5.
+ * @param laikas Bendras vykdymo laikas milisekundėmis.
+ */
 template <typename StudentContainer>
 void testavimas(StudentContainer& stud, StudentContainer& maladiec, StudentContainer& lopai, double& laikas) {
     vidurkis(maladiec);
@@ -622,6 +898,14 @@ void testavimas(StudentContainer& stud, StudentContainer& maladiec, StudentConta
     std::cout << std::endl;
 }
 
+/**
+ * @brief Leidžia pasirinkti vieną iš iš anksto numatytų testavimo failų ir jį apdoroja.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param stud Bendras studentų konteineris.
+ * @param maladiec Konteineris studentams su teigiamu rezultatu.
+ * @param lopai Konteineris studentams su neigiamu rezultatu.
+ * @param laikas Bendras vykdymo laikas milisekundėmis.
+ */
 template <typename StudentContainer>
 void tyrimai_5(StudentContainer& stud, StudentContainer& maladiec, StudentContainer& lopai, double& laikas) {
     while (true) {
@@ -662,6 +946,12 @@ void tyrimai_5(StudentContainer& stud, StudentContainer& maladiec, StudentContai
     }
 }
 
+/**
+ * @brief Paleidžia pagrindinę studentų įvedimo, apdorojimo ir išvedimo programos eigą.
+ * @tparam StudentContainer Studentų konteinerio tipas.
+ * @param konteinerio_pavadinimas Vartotojui rodomas naudojamo konteinerio pavadinimas.
+ * @return Programos pabaigos kodas.
+ */
 template <typename StudentContainer>
 int run_program(const std::string& konteinerio_pavadinimas) {
     using Student = typename StudentContainer::value_type;
@@ -759,6 +1049,13 @@ int run_program(const std::string& konteinerio_pavadinimas) {
     isvestis_failas(stud);
     return 0;
 }
+
+/**
+ * @brief Surikiuoja studentų konteinerį didėjimo tvarka pagal galutinį vidurkį.
+ * @tparam Container Studentų konteinerio tipas.
+ * @param c Rikiuojamas konteineris.
+ * @param laikas Bendras vykdymo laikas milisekundėmis; prie jo pridedama rikiavimo trukmė.
+ */
 template <typename Container>
 void sort_ascending(Container& c, double& laikas) {
     const auto pradzia = std::chrono::high_resolution_clock::now();
