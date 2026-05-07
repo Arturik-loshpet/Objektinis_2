@@ -1,11 +1,19 @@
 #include "funkcijos.h"
-#include "test_framework.h"
 
+#include <iostream>
 #include <sstream>
 #include <type_traits>
 
 VectorStudent sukurti_studenta() {
     return VectorStudent("Jonas", "Jonaitis", {8, 9}, 10, 9.2, 8.5);
+}
+
+bool check(bool salyga, const std::string& zinute) {
+    if (!salyga) {
+        std::cout << "  Klaida: " << zinute << std::endl;
+        return false;
+    }
+    return true;
 }
 
 bool test_rule_of_five() {
@@ -18,21 +26,21 @@ bool test_rule_of_five() {
     VectorStudent pirmas = sukurti_studenta();
 
     VectorStudent kopija(pirmas);
-    CHECK(kopija.vardas() == "Jonas");
-    CHECK(kopija.pazymiai().size() == 2);
+    if (!check(kopija.vardas() == "Jonas", "kopijavimo konstruktorius nenukopijavo vardo")) return false;
+    if (!check(kopija.pazymiai().size() == 2, "kopijavimo konstruktorius nenukopijavo pazymiu")) return false;
 
     VectorStudent perkeltas(std::move(pirmas));
-    CHECK(perkeltas.vardas() == "Jonas");
-    CHECK(pirmas.vardas().empty());
+    if (!check(perkeltas.vardas() == "Jonas", "perkelimo konstruktorius neperkele vardo")) return false;
+    if (!check(pirmas.vardas().empty(), "senas objektas po perkelimo nebuvo isvalytas")) return false;
 
     VectorStudent priskirtas("", "", {}, 0, 0.0, 0.0);
     priskirtas = kopija;
-    CHECK(priskirtas.pavarde() == "Jonaitis");
+    if (!check(priskirtas.pavarde() == "Jonaitis", "kopijavimo priskyrimas nenukopijavo pavardes")) return false;
 
     VectorStudent perkeltas_priskiriant("", "", {}, 0, 0.0, 0.0);
     perkeltas_priskiriant = std::move(priskirtas);
-    CHECK(perkeltas_priskiriant.vardas() == "Jonas");
-    CHECK(priskirtas.vardas().empty());
+    if (!check(perkeltas_priskiriant.vardas() == "Jonas", "perkelimo priskyrimas neperkele vardo")) return false;
+    if (!check(priskirtas.vardas().empty(), "senas objektas po perkelimo priskyrimo nebuvo isvalytas")) return false;
 
     return true;
 }
@@ -41,9 +49,9 @@ bool test_paveldimumas() {
     VectorStudent studentas = sukurti_studenta();
     Zmogus& zmogus = studentas;
 
-    CHECK(zmogus.vardas() == "Jonas");
-    CHECK(zmogus.pavarde() == "Jonaitis");
-    CHECK(zmogus.tipas() == "Studentas");
+    if (!check(zmogus.vardas() == "Jonas", "neteisingas vardas per Zmogus sasaja")) return false;
+    if (!check(zmogus.pavarde() == "Jonaitis", "neteisinga pavarde per Zmogus sasaja")) return false;
+    if (!check(zmogus.tipas() == "Studentas", "neteisingas tipas")) return false;
 
     return true;
 }
@@ -54,23 +62,23 @@ bool test_operatoriai() {
 
     in >> studentas;
 
-    CHECK(studentas.vardas() == "Ona");
-    CHECK(studentas.egzaminas() == 9);
-    CHECK(studentas.pazymiai().size() == 3);
+    if (!check(studentas.vardas() == "Ona", "operatorius >> nenuskaite vardo")) return false;
+    if (!check(studentas.egzaminas() == 9, "operatorius >> nenuskaite egzamino")) return false;
+    if (!check(studentas.pazymiai().size() == 3, "operatorius >> nenuskaite pazymiu")) return false;
 
     std::ostringstream out;
     out << studentas;
-    CHECK(out.str() == "Ona Onaite 9 3 10 8 7");
+    if (!check(out.str() == "Ona Onaite 9 3 10 8 7", "operatorius << isvede neteisinga formata")) return false;
 
     return true;
 }
 
 bool test_validacija() {
-    CHECK(valid_name("Ona"));
-    CHECK(valid_name("Ona-Marija"));
-    CHECK(!valid_name("Jonas1"));
-    CHECK(validation("15") == 15);
-    CHECK(validation("abc") == 0);
+    if (!check(valid_name("Ona"), "vardas turetu buti tinkamas")) return false;
+    if (!check(valid_name("Ona-Marija"), "vardas su bruksneliu turetu buti tinkamas")) return false;
+    if (!check(!valid_name("Jonas1"), "vardas su skaiciumi turetu buti netinkamas")) return false;
+    if (!check(validation("15") == 15, "tekstas '15' turetu tapti skaiciumi 15")) return false;
+    if (!check(validation("abc") == 0, "neteisingas skaicius turetu grazinti 0")) return false;
 
     return true;
 }
@@ -82,21 +90,36 @@ bool test_vidurkis_mediana() {
     vidurkis(studentai);
     mediana(studentai);
 
-    CHECK(studentai[0].vidurkis() == 9.6);
-    CHECK(studentai[0].mediana() == 9.0);
+    if (!check(studentai[0].vidurkis() == 9.6, "neteisingai apskaiciuotas vidurkis")) return false;
+    if (!check(studentai[0].mediana() == 9.0, "neteisingai apskaiciuota mediana")) return false;
 
     std::list<int> pazymiai{10, 6, 8, 4};
-    CHECK(skaiciuoti_mediana(pazymiai) == 7.0);
+    if (!check(skaiciuoti_mediana(pazymiai) == 7.0, "neteisinga list medianos reiksme")) return false;
 
     return true;
 }
 
-int main() {
-    RUN_TEST(test_rule_of_five);
-    RUN_TEST(test_paveldimumas);
-    RUN_TEST(test_operatoriai);
-    RUN_TEST(test_validacija);
-    RUN_TEST(test_vidurkis_mediana);
+void paleisti_testa(const std::string& pavadinimas, bool (*testas)(), int& praejo, int& nepraejo) {
+    std::cout << "Vykdomas testas: " << pavadinimas << std::endl;
+    if (testas()) {
+        ++praejo;
+        std::cout << "  OK" << std::endl;
+    } else {
+        ++nepraejo;
+        std::cout << "  NEPRAEJO" << std::endl;
+    }
+}
 
-    return testu_rezultatas();
+int main() {
+    int praejo = 0;
+    int nepraejo = 0;
+
+    paleisti_testa("Rule of Five", test_rule_of_five, praejo, nepraejo);
+    paleisti_testa("Paveldimumas", test_paveldimumas, praejo, nepraejo);
+    paleisti_testa("Operatoriai", test_operatoriai, praejo, nepraejo);
+    paleisti_testa("Validacija", test_validacija, praejo, nepraejo);
+    paleisti_testa("Vidurkis ir mediana", test_vidurkis_mediana, praejo, nepraejo);
+
+    std::cout << "Praejo: " << praejo << ", nepraejo: " << nepraejo << std::endl;
+    return nepraejo == 0 ? 0 : 1;
 }

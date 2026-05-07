@@ -92,10 +92,8 @@ Testavimo kodas yra paleidžiamas konsolėje įvedus ./rule_of_five_test. Jis na
 
 ---------------------------------------------------------------------------------------------------------------------------
 V1.3 UNIT TESTAI
-Realizuoti unit testai naudojant savarankišką lengvą C++ testų karkasą `test_framework.h`.
-Karkasas palaiko:
-1. `CHECK` - loginėms sąlygoms ir reikšmių palyginimams tikrinti.
-2. `RUN_TEST` - testavimo funkcijai paleisti ir rezultatui išvesti.
+Realizuoti paprasti unit testai faile `rule_of_five_test.cpp`.
+Testuose naudojama pagalbinė `check` funkcija, kuri patikrina sąlygą ir išveda klaidos pranešimą.
 
 Testai paleidžiami komanda:
 1. `make test`
@@ -106,7 +104,6 @@ Pateikti testai tikrina:
 3. Įvesties ir išvesties operatorius `>>` ir `<<`.
 4. Vardo bei skaičių validacijos funkcijas.
 5. Galutinio vidurkio ir medianos skaičiavimą.
-
 
 
 
