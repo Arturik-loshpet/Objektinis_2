@@ -17,9 +17,9 @@ public:
           mediana_(mediana) {}
     
     ~Studentas(){
-        vardas.clear();
-        pavarde.clear();
-
+        vardas_.clear();
+        pavarde_.clear();
+        
     }
 
     const std::string& vardas() const { return vardas_; }
