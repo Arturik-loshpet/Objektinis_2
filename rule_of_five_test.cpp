@@ -16,6 +16,7 @@ bool check(bool salyga, const std::string& zinute) {
     return true;
 }
 
+
 bool test_rule_of_five() {
     static_assert(std::is_copy_constructible_v<VectorStudent>);
     static_assert(std::is_move_constructible_v<VectorStudent>);
