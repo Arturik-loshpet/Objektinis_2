@@ -91,7 +91,15 @@ Kaip veikia testavimas:
 Testavimo kodas yra paleidžiamas konsolėje įvedus ./rule_of_five_test. Jis naudojamas visų naujų metodų patikrai. Kodui praėjus testavimą į konsole yra išvedama eilutė "Visi rule of five ir operatoriu testai praejo.", jeigu programa yra terminuojama, reiškias program nepraėjo testavimų.
 
 ---------------------------------------------------------------------------------------------------------------------------
-V1.3 UNIT TESTAI
+V1.5 TESTAVIMAI
+
+Padaryti pokyčiai - sukurta abstrakti klasė "Zmogus", kurios išvestinė yra programos pagrindinė naudojama klasė "Studentas". Šioje klasėje yra saugomi tokie parametrai kaip vardas ir pavardė, kuriuos paveldi klasė "Studentas". "Zmogus" klasės objektus sukurti nėra įmanoma, kadangi čia yra abstrakti klasė, o jos išvestinių klasių, kaip "Studentas", objektų kūrimas yra įmanomas.
+
+Ši nauja versija palaiko visas prieš tai realizuotas funkcijas.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+V2.0 UNIT TESTAI
 Realizuoti paprasti unit testai faile `rule_of_five_test.cpp`.
 Testuose naudojama pagalbinė `check` funkcija, kuri patikrina sąlygą ir išveda klaidos pranešimą.
 
