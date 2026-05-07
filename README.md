@@ -77,6 +77,7 @@ Testavimui buvo naudojami optimizacijos flagai -O1, -O2, -O3 ir testavimai buvo 
 <img width="482" height="117" alt="image" src="https://github.com/user-attachments/assets/fb510307-4192-462a-a70b-5856c783f1c8" />
 
 "Programa" paleidimo failo dydis naudojant pirmą flagą - 329Kb.
+
 ---------------------------------------------------------------------------------------------------------------------------
 Išvados:
 Matosi aiškus skirtumas tarp programų atlikimo laiko kur nebuvo naudojami optimizacijos flagai ir kur buvo, kadangi skirtumas atlikimo laike vos ne dvigubai skiriasi, bet atlikimo greičio skirtumas tarp pačių flagų nėra aiškiai pastebimas.
