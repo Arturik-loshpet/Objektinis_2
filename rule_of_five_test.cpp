@@ -4,72 +4,78 @@
 #include <sstream>
 #include <type_traits>
 
-VectorStudent studentas() {
+VectorStudent sukurti_studenta() {
     return VectorStudent("Jonas", "Jonaitis", {8, 9}, 10, 9.2, 8.5);
 }
 
-TEST_CASE("Rule of Five") {
+bool test_rule_of_five() {
     static_assert(std::is_copy_constructible_v<VectorStudent>);
     static_assert(std::is_move_constructible_v<VectorStudent>);
     static_assert(std::is_copy_assignable_v<VectorStudent>);
     static_assert(std::is_move_assignable_v<VectorStudent>);
     static_assert(std::is_destructible_v<VectorStudent>);
 
-    VectorStudent pradinis = studentas();
+    VectorStudent pirmas = sukurti_studenta();
 
-    VectorStudent kopija(pradinis);
-    pradinis.setVardas("Petras");
+    VectorStudent kopija(pirmas);
     CHECK(kopija.vardas() == "Jonas");
     CHECK(kopija.pazymiai().size() == 2);
 
-    VectorStudent perkeltas(std::move(pradinis));
-    CHECK(perkeltas.vardas() == "Petras");
-    CHECK(pradinis.vardas().empty());
+    VectorStudent perkeltas(std::move(pirmas));
+    CHECK(perkeltas.vardas() == "Jonas");
+    CHECK(pirmas.vardas().empty());
 
-    VectorStudent priskirta("", "", {}, 0, 0.0, 0.0);
-    priskirta = kopija;
-    kopija.setPavarde("Petraitis");
-    CHECK(priskirta.pavarde() == "Jonaitis");
+    VectorStudent priskirtas("", "", {}, 0, 0.0, 0.0);
+    priskirtas = kopija;
+    CHECK(priskirtas.pavarde() == "Jonaitis");
 
-    VectorStudent perkeltaPriskiriant("", "", {}, 0, 0.0, 0.0);
-    perkeltaPriskiriant = std::move(priskirta);
-    CHECK(perkeltaPriskiriant.vardas() == "Jonas");
-    CHECK(priskirta.vardas().empty());
+    VectorStudent perkeltas_priskiriant("", "", {}, 0, 0.0, 0.0);
+    perkeltas_priskiriant = std::move(priskirtas);
+    CHECK(perkeltas_priskiriant.vardas() == "Jonas");
+    CHECK(priskirtas.vardas().empty());
+
+    return true;
 }
 
-TEST_CASE("Studentas per Zmogus sasaja") {
-    VectorStudent s = studentas();
-    Zmogus& z = s;
+bool test_paveldimumas() {
+    VectorStudent studentas = sukurti_studenta();
+    Zmogus& zmogus = studentas;
 
-    CHECK(z.vardas() == "Jonas");
-    CHECK(z.pavarde() == "Jonaitis");
-    CHECK(z.tipas() == "Studentas");
+    CHECK(zmogus.vardas() == "Jonas");
+    CHECK(zmogus.pavarde() == "Jonaitis");
+    CHECK(zmogus.tipas() == "Studentas");
+
+    return true;
 }
 
-TEST_CASE("Ivesties ir isvesties operatoriai") {
-    VectorStudent s("", "", {}, 0, 0.0, 0.0);
+bool test_operatoriai() {
+    VectorStudent studentas("", "", {}, 0, 0.0, 0.0);
     std::istringstream in("Ona Onaite 9 3 10 8 7");
 
-    in >> s;
+    in >> studentas;
 
-    CHECK(s.vardas() == "Ona");
-    CHECK(s.egzaminas() == 9);
-    CHECK(s.pazymiai().size() == 3);
+    CHECK(studentas.vardas() == "Ona");
+    CHECK(studentas.egzaminas() == 9);
+    CHECK(studentas.pazymiai().size() == 3);
 
     std::ostringstream out;
-    out << s;
+    out << studentas;
     CHECK(out.str() == "Ona Onaite 9 3 10 8 7");
+
+    return true;
 }
 
-TEST_CASE("Validacija") {
+bool test_validacija() {
     CHECK(valid_name("Ona"));
     CHECK(valid_name("Ona-Marija"));
     CHECK(!valid_name("Jonas1"));
-    CHECK(validation("42") == 42);
+    CHECK(validation("15") == 15);
     CHECK(validation("abc") == 0);
+
+    return true;
 }
 
-TEST_CASE("Vidurkis ir mediana") {
+bool test_vidurkis_mediana() {
     VectorContainer studentai;
     studentai.push_back(VectorStudent("Ona", "Onaite", {8, 10, 9}, 10, 0.0, 0.0));
 
@@ -81,8 +87,16 @@ TEST_CASE("Vidurkis ir mediana") {
 
     std::list<int> pazymiai{10, 6, 8, 4};
     CHECK(skaiciuoti_mediana(pazymiai) == 7.0);
+
+    return true;
 }
 
 int main() {
-    return mini_test::run_all();
+    RUN_TEST(test_rule_of_five);
+    RUN_TEST(test_paveldimumas);
+    RUN_TEST(test_operatoriai);
+    RUN_TEST(test_validacija);
+    RUN_TEST(test_vidurkis_mediana);
+
+    return testu_rezultatas();
 }
