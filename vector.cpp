@@ -194,6 +194,11 @@ class MyVector{
             return data[0];
         }
 
+        void erase(T* first, T* last){
+            T* newEnd = std::move(last, end(), first);
+            size -= last - first;
+            return first;
+        }
 
         ~MyVector(){ //destruktorius
             delete[] data;
