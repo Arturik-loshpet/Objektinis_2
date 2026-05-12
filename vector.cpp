@@ -39,6 +39,25 @@ class MyVector{
         capacity(1),
         data(new T[capacity]){}
 
+        MyVector(const MyVector& other): //copy konstruktorius
+            size(other.size),
+            capacity(other.capacity),
+            data(new T[other.capacity]){
+                for(size_t i =0; i< size; i++){
+                    data[i] = other.data[i];
+                }
+            }
+
+        MyVector(MyVector&& other): // move konstruktorius
+            size(other.size),
+            capacity(other.capacity),
+            data(new T[other.capacity])
+            {
+                other.size = 0;
+                other.capacity = 0;
+                delete[] other.data;
+            }
+
         void push_back(T val){ //Iraso nauja kintamaji i vektorio funkcija
             if (size == capacity) resize();
             data[size] = val;
@@ -66,6 +85,36 @@ class MyVector{
             return data[index];
         }
 
+        MyVector& operator=(const MyVector& other){ // lygu operatorius :(
+            if(this != &other){
+                delete[] data;
+                size = other.size;
+                capacity = other.capacity;
+                data =new T[other.capacity];{
+                    for(size_t i =0; i< size; i++){
+                        data[i] = other.data[i];
+                    }
+                }
+            }
+            return *this;
+        }
+
+        MyVector& operator=(MyVector&& other) { //move assignment operatorius
+            if (this != &other) {
+                delete[] data;
+
+                size = other.size;
+                capacity = other.capacity;
+                data = other.data;
+
+                other.size = 0;
+                other.capacity = 0;
+                other.data = nullptr;
+            }
+
+        return *this;
+        }
+
         size_t begin(){ //grazina pirma vektoriaus reiksme
             return data[0];
         }
@@ -87,4 +136,8 @@ int main(){
         vec.push_back(i);
     }
     std::cout << vec.end();
+
+    MyVector<int> vec2;
+    vec2 = vec;
+    std::cout << vec2.end();
 }
