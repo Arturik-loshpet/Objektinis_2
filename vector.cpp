@@ -16,6 +16,8 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <stdexcept>
+
 
 
 template <typename T>
@@ -114,7 +116,7 @@ class MyVector{
         Funkcijos
         */
 
-        void push_back(T val){ //Iraso nauja kintamaji i vektorio funkcija
+        void push_back(const T& val){ //Iraso nauja kintamaji i vektorio funkcija
             if (size == capacity) resize();
             data[size] = val;
             size++;
@@ -194,10 +196,29 @@ class MyVector{
             return data[0];
         }
 
-        void erase(T* first, T* last){
-            T* newEnd = std::move(last, end(), first);
+        T* erase(T* first, T* last){
+            std::move(last, end(), first);
             size -= last - first;
             return first;
+        }
+
+        T* erase(T* pos) {
+            return erase(pos, pos + 1);
+        }
+
+        T& at(size_t index){ //patikrina vektoriaus ribas
+            if(size <= index){
+                throw std::out_of_range("MyVector index out of range");
+            }
+            return data[index];
+        }
+
+        const T& at(size_t index) const {
+            if (index >= size) {
+                throw std::out_of_range("MyVector index out of range");
+            }
+
+            return data[index];
         }
 
         ~MyVector(){ //destruktorius
