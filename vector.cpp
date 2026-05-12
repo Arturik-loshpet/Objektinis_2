@@ -66,6 +66,14 @@ class MyVector{
             return data[index];
         }
 
+        size_t begin(){ //grazina pirma vektoriaus reiksme
+            return data[0];
+        }
+
+        size_t end(){ //grazina paskutinia reiksme
+            return data[size - 1]; 
+        }
+
         ~MyVector(){ //destruktorius
             delete[] data;
             size = 0;
@@ -75,12 +83,8 @@ class MyVector{
 
 int main(){
     MyVector<int> vec;
-    for(int i=0; i<5; i++){
+    for(int i=1; i<5; i++){
         vec.push_back(i);
     }
-    for(int i=4; i>=0; i--){
-        std::cout << vec[i] << '\n';
-    }
-    vec.clear();
-    std::cout << vec.empty();
+    std::cout << vec.end();
 }
