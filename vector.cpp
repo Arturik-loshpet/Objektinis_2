@@ -23,14 +23,14 @@
 template <typename T>
 class MyVector{
     private:
-        size_t size;
-        size_t capacity;
+        size_t size_;
+        size_t capacity_;
         T* data;
-        void resize(){ //padidina capacity vektoriui
-            if(capacity == 0) capacity = 1;
-            else capacity = capacity * 2;
-            T * newData = new T[capacity];
-            for(size_t i=0; i<size; i++){
+        void resize(){ //padidina capacity_ vektoriui
+            if(capacity_ == 0) capacity_ = 1;
+            else capacity_ = capacity_ * 2;
+            T * newData = new T[capacity_];
+            for(size_t i=0; i<size_; i++){
                 newData[i] = data[i];
             }
             delete[] data;
@@ -45,26 +45,26 @@ class MyVector{
         Konstruktoriai
         */
         MyVector(): //vektoriaus konstruktorius
-        size(0),
-        capacity(1),
-        data(new T[capacity]){}
+        size_(0),
+        capacity_(1),
+        data(new T[capacity_]){}
 
         MyVector(const MyVector& other): //copy konstruktorius
-            size(other.size),
-            capacity(other.capacity),
-            data(new T[other.capacity]){
-                for(size_t i =0; i< size; i++){
+            size_(other.size_),
+            capacity_(other.capacity_),
+            data(new T[other.capacity_]){
+                for(size_t i =0; i< size_; i++){
                     data[i] = other.data[i];
                 }
             }
 
         MyVector(MyVector&& other): // move konstruktorius
-            size(other.size),
-            capacity(other.capacity),
+            size_(other.size_),
+            capacity_(other.capacity_),
             data(other.data)
             {
-                other.size = 0;
-                other.capacity = 0;
+                other.size_ = 0;
+                other.capacity_ = 0;
                 other.data = nullptr;
             }
 
@@ -80,10 +80,10 @@ class MyVector{
         MyVector& operator=(const MyVector& other){ // lygu operatorius :(
             if(this != &other){
                 delete[] data;
-                size = other.size;
-                capacity = other.capacity;
-                data = new T[other.capacity];{
-                    for(size_t i =0; i< size; i++){
+                size_ = other.size_;
+                capacity_ = other.capacity_;
+                data = new T[other.capacity_];{
+                    for(size_t i =0; i< size_; i++){
                         data[i] = other.data[i];
                     }
                 }
@@ -95,12 +95,12 @@ class MyVector{
             if (this != &other) {
                 delete[] data;
 
-                size = other.size;
-                capacity = other.capacity;
+                size_ = other.size_;
+                capacity_ = other.capacity_;
                 data = other.data;
 
-                other.size = 0;
-                other.capacity = 0;
+                other.size_ = 0;
+                other.capacity_ = 0;
                 other.data = nullptr;
             }
 
@@ -117,50 +117,53 @@ class MyVector{
         */
 
         void push_back(const T& val){ //Iraso nauja kintamaji i vektorio funkcija
-            if (size == capacity) resize();
-            data[size] = val;
-            size++;
+            if (size_ == capacity_) resize();
+            data[size_] = val;
+            size_++;
         }
 
         void pop_back(){ //istrina nari vektoriaus gale
-            if(size > 0) size--;
+            if(size_ > 0) size_--;
         }
 
         bool empty(){ //patikrina ar vektorius tuscias
-            return size == 0;
+            return size_ == 0;
         }
 
         bool empty() const{ //const versija sios funkcijos
-            return size == 0;
+            return size_ == 0;
         }
 
-        size_t get_size(){ //grazina vektoriaus dydi
-            return size;
+        size_t size(){ //grazina vektoriaus dydi
+            return size_;
         }
 
-        size_t get_size() const{ //konstanta
-            return size;
+        size_t size() const{ //konstanta
+            return size_;
         }
 
-        size_t get_capacity() const { //grazina vektoriaus capacity
-            return capacity;
+        size_t capacity() const { //grazina vektoriaus capacity_
+            return capacity_;
         }
+         size_t capacity() const{
+            return capacity_;
+         }
 
         void clear(){ //isvalo vektoriu
-            size = 0;
+            size_ = 0;
         }
 
-        void shrink_to_fit(){ //sumazina vektoriaus capacity iki uzpildyto vektoriaus dydzio
-            if(capacity > size){
-                T* newData = new T[size];
+        void shrink_to_fit(){ //sumazina vektoriaus capacity_ iki uzpildyto vektoriaus dydzio
+            if(capacity_ > size_){
+                T* newData = new T[size_];
 
-                for(size_t i =0; i<size; i++){
+                for(size_t i =0; i<size_; i++){
                     newData[i] = data[i];
                 }
 
                 delete[] data;
                 data = newData;
-                capacity = size;
+                capacity_ = size_;
             }
         }
 
@@ -169,7 +172,7 @@ class MyVector{
         }
 
         T* end() {
-            return data + size;
+            return data + size_;
         }
 
         const T* begin() const {
@@ -177,15 +180,15 @@ class MyVector{
         }
 
         const T* end() const {
-            return data + size;
+            return data + size_;
         }
 
         T& back(){
-            return data[size - 1];
+            return data[size_ - 1];
         }
 
         const T& back() const{
-            return data[size - 1];
+            return data[size_ - 1];
         }
 
         T& front(){
@@ -198,7 +201,7 @@ class MyVector{
 
         T* erase(T* first, T* last){
             std::move(last, end(), first);
-            size -= last - first;
+            size_ -= last - first;
             return first;
         }
 
@@ -207,24 +210,26 @@ class MyVector{
         }
 
         T& at(size_t index){ //patikrina vektoriaus ribas
-            if(size <= index){
+            if(size_ <= index){
                 throw std::out_of_range("MyVector index out of range");
             }
             return data[index];
         }
 
         const T& at(size_t index) const {
-            if (index >= size) {
+            if (index >= size_) {
                 throw std::out_of_range("MyVector index out of range");
             }
 
             return data[index];
         }
 
+        
+
         ~MyVector(){ //destruktorius
             delete[] data;
-            size = 0;
-            capacity = 0;
+            size_ = 0;
+            capacity_ = 0;
         }
 };
 
