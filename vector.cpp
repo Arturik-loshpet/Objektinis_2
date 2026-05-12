@@ -26,7 +26,7 @@ class MyVector{
         size_t size_;
         size_t capacity_;
         T* data;
-        void resize(){ //padidina capacity_ vektoriui
+        void grow(){ //padidina capacity_ vektoriui
             if(capacity_ == 0) capacity_ = 1;
             else capacity_ = capacity_ * 2;
             T * newData = new T[capacity_];
@@ -117,7 +117,7 @@ class MyVector{
         */
 
         void push_back(const T& val){ //Iraso nauja kintamaji i vektorio funkcija
-            if (size_ == capacity_) resize();
+            if (size_ == capacity_) grow();
             data[size_] = val;
             size_++;
         }
@@ -142,7 +142,7 @@ class MyVector{
             return size_;
         }
 
-        size_t capacity() const { //grazina vektoriaus capacity_
+        size_t capacity() { //grazina vektoriaus capacity_
             return capacity_;
         }
          size_t capacity() const{
@@ -224,7 +224,41 @@ class MyVector{
             return data[index];
         }
 
-        
+        void reserve(size_t newCapacity){ //pakeisti vektoriaus capacity
+            if(newCapacity <= capacity_){
+                return;
+            }
+
+            T* newData = new T[newCapacity];
+            for(size_t i=0; i<size_; i++){
+                newData = data[i];
+            }
+
+            delete[] data;
+            data = newData;
+            capacity_ = newCapacity;
+        }
+
+        void resize(size_t newSize){
+            if(newSize > capacity_) reserve(newSize);
+
+            for(size_t i; i<newSize; i++){
+                data[i] = T();
+            }
+
+            size_ = newSize;
+        }
+
+        void resize(size_t newSize, const T& value) {
+            if (newSize > capacity_) reserve(newSize);
+
+            for (size_t i = 0; i < newSize; i++) {
+                data[i] = value;
+            }
+
+            size_ = newSize;
+        }
+
 
         ~MyVector(){ //destruktorius
             delete[] data;
