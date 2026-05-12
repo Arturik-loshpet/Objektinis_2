@@ -34,6 +34,13 @@ class MyVector{
             data = newData;
         }
     public:
+
+        using value_type = T;
+
+        /*
+        ---------------------------------------------------
+        Konstruktoriai
+        */
         MyVector(): //vektoriaus konstruktorius
         size(0),
         capacity(1),
@@ -58,28 +65,10 @@ class MyVector{
                 delete[] other.data;
             }
 
-        void push_back(T val){ //Iraso nauja kintamaji i vektorio funkcija
-            if (size == capacity) resize();
-            data[size] = val;
-            size++;
-        }
-
-        void pop_back(){ //istrina nari vektoriaus gale
-            if(size > 0) size--;
-        }
-
-        bool empty(){ //patikrina ar vektorius tuscias
-            return size == 0;
-        }
-
-        size_t get_size(){ //grazina vektoriaus dydi
-            return size;
-        }
-
-        void clear(){ //isvalo vektoriu
-            size = 0;
-            capacity = 0;
-        }
+        /*
+        ---------------------------------------------------
+        Operatoriai
+        */
 
         T & operator[](size_t index){ //grazina vektoriaus reiksme duotam indexe
             return data[index];
@@ -115,12 +104,57 @@ class MyVector{
         return *this;
         }
 
+        /*
+        ---------------------------------------------------
+        Funkcijos
+        */
+
+        void push_back(T val){ //Iraso nauja kintamaji i vektorio funkcija
+            if (size == capacity) resize();
+            data[size] = val;
+            size++;
+        }
+
+        void pop_back(){ //istrina nari vektoriaus gale
+            if(size > 0) size--;
+        }
+
+        bool empty(){ //patikrina ar vektorius tuscias
+            return size == 0;
+        }
+
+        size_t get_size(){ //grazina vektoriaus dydi
+            return size;
+        }
+
+        size_t get_capacity() const { //grazina vektoriaus capacity
+            return capacity;
+        }
+
+        void clear(){ //isvalo vektoriu
+            size = 0;
+        }
+
         size_t begin(){ //grazina pirma vektoriaus reiksme
             return data[0];
         }
 
         size_t end(){ //grazina paskutinia reiksme
             return data[size - 1]; 
+        }
+
+        void shrink_to_fit(){ //sumazina vektoriaus capacity iki uzpildyto vektoriaus dydzio
+            if(capacity > size){
+                T* newData = new T[size];
+
+                for(size_t i =0; i<size; i++){
+                    newData[i] = data[i];
+                }
+
+                delete[] data;
+                data = newData;
+                capacity = size;
+            }
         }
 
         ~MyVector(){ //destruktorius
