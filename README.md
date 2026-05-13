@@ -103,8 +103,36 @@ Padaryti pokyčiai - sukurta abstrakti klasė "Zmogus", kurios išvestinė yra p
 
 Ši nauja versija palaiko visas prieš tai realizuotas funkcijas.
 
+---------------------------------------------------------------------------------------------------------------------------
+V3.0 TESTAVIMAI
 
+Padaryti pokyčiai - sukurtas naujas konteineris MyVector, kuris yra naudojamas vietoj standartinio std::vector. Šis konteineris ir jo visos funkcijos yra aprašytos faile "vector.cpp", jis įgyvendina 80% standartinio vektoriaus funkcijų.
 
+Pačią vektoriaus klasę sudaro tik trys kintamieji.
+Size_ - elemtų kiekis vektoriuje
+Capacity_ kiek vietos yra dedikuota vektoriui
+data_ saugomi duomenys vektoriuje
+
+Sukurtų funkcijų pavyzdžiai:
+
+Grow(): Grow yra privati funkcija, kurios negalima iškviesti už pačios klasės ribų. Jos paskirtis yra didinti vektoriaus talpa automatiškai, kai rašymo metu yra pasiekiamas limitas.
+//nuotrauka funkcijos grow.
+
+push_back(): 
+Push_back funkcija yra naudojama naujam elementui įrašyti į vektoriaus galą. Prieš įrašant reikšmę yra patikrinama ar vektoriuje dar yra laisvos vietos. Jeigu size_ yra lygus capacity_, tada iškviečiama grow() funkcija, kuri padidina vektoriaus talpą. Po to nauja reikšmė yra įrašoma į data_[size_] vietą ir size_ padidinamas vienetu.
+//nuotrauka funkcijos push_back.
+
+pop_back():
+Pop_back funkcija pašalina paskutinį vektoriaus elementą. Funkcija pirmiausia patikrina ar vektorius nėra tuščias, tai yra ar size_ yra daugiau už 0. Jeigu vektoriuje yra elementų, size_ yra sumažinamas vienetu. Pats elementas iš atminties nėra fiziškai ištrinamas, bet jis tampa nebenaudojamas, nes vektoriaus dydis sumažėja.
+//nuotrauka funkcijos pop_back.
+
+reserve():
+Reserve funkcija yra naudojama iš anksto padidinti vektoriaus talpą. Ji nekeičia size_, todėl vektoriaus elementų kiekis lieka toks pats. Jeigu vartotojo nurodytas naujas capacity yra mažesnis arba lygus dabartiniam capacity_, funkcija nieko nedaro. Jeigu naujas capacity yra didesnis, sukuriamas naujas masyvas, į jį perkeliami seni duomenys, senas masyvas ištrinamas ir data_ pradeda rodyti į naują masyvą.
+//nuotrauka funkcijos reserve.
+
+erase():
+Erase funkcija yra naudojama pašalinti vieną elementą arba elementų intervalą iš vektoriaus. Funkcijai perduodami iteratoriai, kurie nurodo nuo kurios vietos iki kurios vietos reikia trinti elementus. Po pašalinimo likę elementai yra perstumiami į kairę, kad vektoriuje neliktų tuščių tarpų. Galiausiai size_ yra sumažinamas pagal pašalintų elementų kiekį.
+//nuotrauka funkcijos erase.
 
 
 
