@@ -303,8 +303,20 @@ class MyVector{
         }
 };
 
+template <typename Container>
+void pildymas(Container& vec, int sk){
+    const auto pradzia = std::chrono::high_resolution_clock::now();
+    for(int i=0; i<sk; i++){
+        vec.push_back(i);
+    }
+    const auto pabaiga = std::chrono::high_resolution_clock::now();
+    const std::chrono::duration<double, std::milli> trukme = pabaiga - pradzia;
+    std::cout << trukme.count() << std::endl;
+}
+
 int main(){
     MyVector<int> vec;
-    vec.assign(5, 2);
-    for(int i=0; i<5; i++) std::cout << vec[i] << " ";
-}   
+    std::vector<int> vec2;
+    pildymas(vec2, 10000000);
+    pildymas(vec, 10000000);
+} 
