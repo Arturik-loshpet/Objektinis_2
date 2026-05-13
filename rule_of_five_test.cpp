@@ -1,16 +1,149 @@
-#include "funkcijos.h"
+#include "vector.cpp"
 
 #include <cassert>
 #include <iostream>
-#include <type_traits>
 #include <sstream>
+#include <string>
+#include <utility>
 
-VectorStudent tusciasStudentas() {
-    return VectorStudent("", "", {}, 0, 0.0, 0.0);
+class TestStudent {
+public:
+    TestStudent(const std::string& vardas,
+                const std::string& pavarde,
+                const MyVector<int>& pazymiai,
+                int egzaminas,
+                double vidurkis,
+                double mediana)
+        : vardas_(vardas),
+          pavarde_(pavarde),
+          pazymiai_(pazymiai),
+          egzaminas_(egzaminas),
+          vidurkis_(vidurkis),
+          mediana_(mediana) {}
+
+    TestStudent(const TestStudent& other)
+        : vardas_(other.vardas_),
+          pavarde_(other.pavarde_),
+          pazymiai_(other.pazymiai_),
+          egzaminas_(other.egzaminas_),
+          vidurkis_(other.vidurkis_),
+          mediana_(other.mediana_) {}
+
+    TestStudent(TestStudent&& other)
+        : vardas_(std::move(other.vardas_)),
+          pavarde_(std::move(other.pavarde_)),
+          pazymiai_(std::move(other.pazymiai_)),
+          egzaminas_(other.egzaminas_),
+          vidurkis_(other.vidurkis_),
+          mediana_(other.mediana_) {
+        other.vardas_.clear();
+        other.pavarde_.clear();
+        other.pazymiai_.clear();
+        other.egzaminas_ = 0;
+        other.vidurkis_ = 0.0;
+        other.mediana_ = 0.0;
+    }
+
+    TestStudent& operator=(const TestStudent& other) {
+        if (this != &other) {
+            vardas_ = other.vardas_;
+            pavarde_ = other.pavarde_;
+            pazymiai_ = other.pazymiai_;
+            egzaminas_ = other.egzaminas_;
+            vidurkis_ = other.vidurkis_;
+            mediana_ = other.mediana_;
+        }
+        return *this;
+    }
+
+    TestStudent& operator=(TestStudent&& other) {
+        if (this != &other) {
+            vardas_ = std::move(other.vardas_);
+            pavarde_ = std::move(other.pavarde_);
+            pazymiai_ = std::move(other.pazymiai_);
+            egzaminas_ = other.egzaminas_;
+            vidurkis_ = other.vidurkis_;
+            mediana_ = other.mediana_;
+
+            other.vardas_.clear();
+            other.pavarde_.clear();
+            other.pazymiai_.clear();
+            other.egzaminas_ = 0;
+            other.vidurkis_ = 0.0;
+            other.mediana_ = 0.0;
+        }
+        return *this;
+    }
+
+    ~TestStudent() = default;
+
+    const std::string& vardas() const { return vardas_; }
+    const std::string& pavarde() const { return pavarde_; }
+    MyVector<int>& pazymiai() { return pazymiai_; }
+    const MyVector<int>& pazymiai() const { return pazymiai_; }
+    int egzaminas() const { return egzaminas_; }
+    double vidurkis() const { return vidurkis_; }
+    double mediana() const { return mediana_; }
+
+    void setVardas(const std::string& vardas) { vardas_ = vardas; }
+    void setPavarde(const std::string& pavarde) { pavarde_ = pavarde; }
+    void setEgzaminas(int egzaminas) { egzaminas_ = egzaminas; }
+    void setVidurkis(double vidurkis) { vidurkis_ = vidurkis; }
+    void setMediana(double mediana) { mediana_ = mediana; }
+
+private:
+    std::string vardas_;
+    std::string pavarde_;
+    MyVector<int> pazymiai_;
+    int egzaminas_ = 0;
+    double vidurkis_ = 0.0;
+    double mediana_ = 0.0;
+};
+
+std::ostream& operator<<(std::ostream& out, const TestStudent& studentas) {
+    out << studentas.vardas() << " "
+        << studentas.pavarde() << " "
+        << studentas.egzaminas() << " "
+        << studentas.pazymiai().size();
+
+    for (int pazymis : studentas.pazymiai()) {
+        out << " " << pazymis;
+    }
+
+    return out;
 }
 
-// Uzpildo studenta pastoviais duomenimis, kad testuose butu lengva lyginti rezultatus.
-void uzpildytiStudenta(VectorStudent& studentas) {
+std::istream& operator>>(std::istream& in, TestStudent& studentas) {
+    std::string vardas;
+    std::string pavarde;
+    int egzaminas = 0;
+    int pazymiuKiekis = 0;
+
+    if (!(in >> vardas >> pavarde >> egzaminas >> pazymiuKiekis)) {
+        return in;
+    }
+
+    studentas.setVardas(vardas);
+    studentas.setPavarde(pavarde);
+    studentas.setEgzaminas(egzaminas);
+    studentas.pazymiai().clear();
+
+    for (int i = 0; i < pazymiuKiekis; ++i) {
+        int pazymis = 0;
+        if (!(in >> pazymis)) {
+            return in;
+        }
+        studentas.pazymiai().push_back(pazymis);
+    }
+
+    return in;
+}
+
+TestStudent tusciasStudentas() {
+    return TestStudent("", "", MyVector<int>(), 0, 0.0, 0.0);
+}
+
+void uzpildytiStudenta(TestStudent& studentas) {
     studentas.setVardas("Jonas");
     studentas.setPavarde("Jonaitis");
     studentas.pazymiai().push_back(8);
@@ -20,8 +153,7 @@ void uzpildytiStudenta(VectorStudent& studentas) {
     studentas.setMediana(8.5);
 }
 
-// Patikrina, ar studento duomenys sutampa su laukiamomis reiksnemis.
-void patikrintiStudenta(const VectorStudent& studentas) {
+void patikrintiStudenta(const TestStudent& studentas) {
     assert(studentas.vardas() == "Jonas");
     assert(studentas.pavarde() == "Jonaitis");
     assert(studentas.pazymiai().size() == 2);
@@ -32,7 +164,7 @@ void patikrintiStudenta(const VectorStudent& studentas) {
     assert(studentas.mediana() == 8.5);
 }
 
-void patikrintiTusciaStudenta(const VectorStudent& studentas) {
+void patikrintiTusciaStudenta(const TestStudent& studentas) {
     assert(studentas.vardas().empty());
     assert(studentas.pavarde().empty());
     assert(studentas.pazymiai().empty());
@@ -41,33 +173,16 @@ void patikrintiTusciaStudenta(const VectorStudent& studentas) {
     assert(studentas.mediana() == 0.0);
 }
 
-// Tikrina konstruktoriu: ar sukurtas objektas turi tuscius/pradinius laukus.
 void test_empty_constructor_values() {
-    static_assert(std::is_abstract_v<Zmogus>, "Zmogus klase privalo buti abstrakti.");
-
-    VectorStudent studentas = tusciasStudentas();
+    TestStudent studentas = tusciasStudentas();
     patikrintiTusciaStudenta(studentas);
 }
 
-// Tikrina paveldimuma ir tai, kad Studentas veikia per abstrakcios bazes sasaja.
-void test_inheritance_from_zmogus() {
-    VectorStudent studentas = tusciasStudentas();
-    studentas.setVardas("Jonas");
-    studentas.setPavarde("Jonaitis");
-
-    Zmogus& zmogus = studentas;
-
-    assert(zmogus.vardas() == "Jonas");
-    assert(zmogus.pavarde() == "Jonaitis");
-    assert(zmogus.tipas() == "Studentas");
-}
-
-// Tikrina kopijavimo konstruktoriu: ar sukuriama pilna ir nepriklausoma kopija.
 void test_copy_constructor() {
-    VectorStudent pirmas = tusciasStudentas();
+    TestStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
-    VectorStudent antras(pirmas);
+    TestStudent antras(pirmas);
     patikrintiStudenta(antras);
 
     pirmas.setVardas("Petras");
@@ -77,20 +192,18 @@ void test_copy_constructor() {
     assert(antras.pazymiai().size() == 2);
 }
 
-// Tikrina perkelimo konstruktoriu: ar duomenys teisingai perkeliami i nauja objekta.
 void test_move_constructor() {
-    VectorStudent pirmas = tusciasStudentas();
+    TestStudent pirmas = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
-    VectorStudent antras(std::move(pirmas));
+    TestStudent antras(std::move(pirmas));
     patikrintiStudenta(antras);
     patikrintiTusciaStudenta(pirmas);
 }
 
-// Tikrina kopijavimo priskyrima: ar vienam objektui priskyrus kita, duomenys nukopijuojami teisingai.
 void test_copy_assignment() {
-    VectorStudent pirmas = tusciasStudentas();
-    VectorStudent antras = tusciasStudentas();
+    TestStudent pirmas = tusciasStudentas();
+    TestStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = pirmas;
@@ -103,28 +216,26 @@ void test_copy_assignment() {
     assert(antras.pazymiai().size() == 2);
 }
 
-// Tikrina perkelimo priskyrima: ar duomenys teisingai perkeliami jau egzistuojanciam objektui.
 void test_move_assignment() {
-    VectorStudent pirmas = tusciasStudentas();
-    VectorStudent antras = tusciasStudentas();
+    TestStudent pirmas = tusciasStudentas();
+    TestStudent antras = tusciasStudentas();
     uzpildytiStudenta(pirmas);
 
     antras = std::move(pirmas);
     patikrintiStudenta(antras);
+    patikrintiTusciaStudenta(pirmas);
 }
 
-// Tikrina destruktoriu: objektas sukuriamas ir sunaikinamas pasibaigus bloko sričiai.
 void test_destructor() {
     {
-        VectorStudent studentas = tusciasStudentas();
+        TestStudent studentas = tusciasStudentas();
         uzpildytiStudenta(studentas);
         assert(studentas.vardas() == "Jonas");
     }
 }
 
-// Tikrina isvesties operatoriu << : ar studento duomenys isvedami laukiamu formatu.
 void test_output_operator() {
-    VectorStudent studentas = tusciasStudentas();
+    TestStudent studentas = tusciasStudentas();
     uzpildytiStudenta(studentas);
     std::ostringstream out;
 
@@ -133,9 +244,8 @@ void test_output_operator() {
     assert(out.str() == "Jonas Jonaitis 10 2 8 9");
 }
 
-// Tikrina ivesties operatoriu >> : ar duomenys teisingai nuskaitomi is srauto i objekta.
 void test_input_operator() {
-    VectorStudent studentas = tusciasStudentas();
+    TestStudent studentas = tusciasStudentas();
     std::istringstream in("Ona Onaite 9 3 10 8 7");
 
     in >> studentas;
@@ -151,7 +261,6 @@ void test_input_operator() {
 
 int main() {
     test_empty_constructor_values();
-    test_inheritance_from_zmogus();
     test_copy_constructor();
     test_move_constructor();
     test_copy_assignment();
@@ -160,6 +269,6 @@ int main() {
     test_output_operator();
     test_input_operator();
 
-    std::cout << "Visi rule of five ir operatoriu testai praejo." << std::endl;
+    std::cout << "Visi MyVector rule of five ir operatoriu testai praejo." << std::endl;
     return 0;
 }

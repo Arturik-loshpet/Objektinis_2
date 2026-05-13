@@ -313,10 +313,3 @@ void pildymas(Container& vec, int sk){
     const std::chrono::duration<double, std::milli> trukme = pabaiga - pradzia;
     std::cout << trukme.count() << std::endl;
 }
-
-int main(){
-    MyVector<int> vec;
-    std::vector<int> vec2;
-    pildymas(vec2, 10000000);
-    pildymas(vec, 10000000);
-} 
