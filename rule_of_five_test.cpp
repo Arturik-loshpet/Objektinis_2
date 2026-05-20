@@ -102,3 +102,13 @@ TEST_CASE("Skaiciavimai"){
     }
 }
 
+TEST_CASE("Validacijos"){
+    SUBCASE("Vardai"){
+        CHECK(valid_name("Ona"));
+        CHECK(valid_name("Ona-Marija"));
+    }
+    SUBCASE("Skaiciai"){
+        CHECK(validation("15") == 15);
+    }
+}
+
